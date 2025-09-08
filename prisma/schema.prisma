@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
+}
+
+model Project {
+  projectId  BigInt   @id @default(autoincrement())
+  name       String   @db.VarChar(200)
+  category   String?  @db.VarChar(100)
+  summary    String?  @db.Text
+  area       Int?
+  location   String?  @db.VarChar(255)
+  type       String?  @db.VarChar(100)
+  photo      String?   @db.VarChar(200)
+  year       Int?
+  slug       String?   @unique @db.VarChar(200)
+  blogUrl    String?  @db.Text
+
+  images     Image[]  @relation("ProjectImages")
+}
+
+model Image {
+  imageId      BigInt  @id @default(autoincrement())
+  projectId    BigInt
+  path         String  @db.Text
+  width        Int?
+  height       Int?
+  no           Int?
+  isLandCover  Boolean @default(false)
+  isPortCover  Boolean @default(false)
+  mime         String? @db.VarChar(50)
+  alt          String? @db.VarChar(255)
+
+  project      Project @relation("ProjectImages", fields: [projectId], references: [projectId], onDelete: Cascade)
+}
