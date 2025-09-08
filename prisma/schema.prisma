@@ -12,7 +12,7 @@ model Project {
   projectId  BigInt   @id @default(autoincrement())
   name       String   @db.VarChar(200)
   category   String?  @db.VarChar(100)
-  summary    String?  @db.Text
+  description    String?  @db.Text
   area       Int?
   location   String?  @db.VarChar(255)
   type       String?  @db.VarChar(100)
