@@ -1,22 +1,22 @@
 -- CreateTable
-CREATE TABLE "public"."Project" (
+CREATE TABLE "public"."Projects" (
     "projectId" BIGSERIAL NOT NULL,
     "name" VARCHAR(200) NOT NULL,
     "category" VARCHAR(100),
-    "summary" TEXT,
+    "description" TEXT,
     "area" INTEGER,
     "location" VARCHAR(255),
     "type" VARCHAR(100),
-    "photo" VARCHAR(200) NOT NULL,
+    "photo" VARCHAR(200),
     "year" INTEGER,
-    "slug" VARCHAR(200) NOT NULL,
+    "slug" VARCHAR(200),
     "blogUrl" TEXT,
 
-    CONSTRAINT "Project_pkey" PRIMARY KEY ("projectId")
+    CONSTRAINT "Projects_pkey" PRIMARY KEY ("projectId")
 );
 
 -- CreateTable
-CREATE TABLE "public"."Image" (
+CREATE TABLE "public"."Images" (
     "imageId" BIGSERIAL NOT NULL,
     "projectId" BIGINT NOT NULL,
     "path" TEXT NOT NULL,
@@ -28,11 +28,11 @@ CREATE TABLE "public"."Image" (
     "mime" VARCHAR(50),
     "alt" VARCHAR(255),
 
-    CONSTRAINT "Image_pkey" PRIMARY KEY ("imageId")
+    CONSTRAINT "Images_pkey" PRIMARY KEY ("imageId")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Project_slug_key" ON "public"."Project"("slug");
+CREATE UNIQUE INDEX "Projects_slug_key" ON "public"."Projects"("slug");
 
 -- AddForeignKey
-ALTER TABLE "public"."Image" ADD CONSTRAINT "Image_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "public"."Project"("projectId") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "public"."Images" ADD CONSTRAINT "Images_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "public"."Projects"("projectId") ON DELETE CASCADE ON UPDATE CASCADE;
