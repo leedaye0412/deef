@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 
 export default async function ProjectsPage() {
   // DB에서 프로젝트 + 관련 이미지 조회
-  const projects = await prisma.project.findMany({
+  const projects = await prisma.projects.findMany({
     include: {
       images: true, // 프로젝트에 연결된 이미지도 함께 가져옴
     },
