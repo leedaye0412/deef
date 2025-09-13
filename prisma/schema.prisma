@@ -8,7 +8,7 @@ datasource db {
   directUrl         = env("DIRECT_URL")
 }
 
-model Projects {
+model projects {
   projectId  BigInt   @id @default(autoincrement())
   name       String   @db.VarChar(200)
   category   String?  @db.VarChar(100)
@@ -21,10 +21,10 @@ model Projects {
   slug       String?   @unique @db.VarChar(200)
   blogUrl    String?  @db.Text
 
-  images     Images[]  @relation("ProjectImages")
+  images     images[]  @relation("ProjectImages")
 }
 
-model Images {
+model images {
   imageId      BigInt  @id @default(autoincrement())
   projectId    BigInt
   path         String  @db.Text
@@ -36,5 +36,5 @@ model Images {
   mime         String? @db.VarChar(50)
   alt          String? @db.VarChar(255)
 
-  projects      Projects @relation("ProjectImages", fields: [projectId], references: [projectId], onDelete: Cascade)
+  projects      projects @relation("ProjectImages", fields: [projectId], references: [projectId], onDelete: Cascade)
 }
