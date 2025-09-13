@@ -20,7 +20,7 @@ model projects {
   year       Int?
   slug       String?   @unique @db.VarChar(200)
   blogUrl    String?  @db.Text
-
+  published     Boolean    @default(false)
   images     images[]  @relation("ProjectImages")
 }
 
