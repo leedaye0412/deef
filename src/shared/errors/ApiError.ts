@@ -1,4 +1,4 @@
-import { ApiErrorBody, ErrorCode } from "@/shared/types";
+import { ApiErrorBody, ErrorCode } from "@shared/types";
 
 export class ApiError extends Error {
   code: ErrorCode;

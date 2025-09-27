@@ -1,14 +1,16 @@
-import { ApiError } from "@/shared/errors/ApiError";
-import { ErrorCode } from "@/shared/types";
+import { ApiError } from "@shared/errors/ApiError";
+import { ErrorCode } from "@shared/types";
 
 const DEFAULT_TIMEOUT = 10_000;
 
-function withTimeout(signal?: AbortSignal, ms = DEFAULT_TIMEOUT) {
+function withTimeout(signal?: AbortSignal | null, ms = DEFAULT_TIMEOUT) {
   const ctrl = new AbortController();
   const id = setTimeout(() => ctrl.abort(), ms);
-  const composed = signal ? new AbortController() : ctrl;
 
-  // 간단 버전: 기존 signal 무시하거나 외부에서 직접 AbortController 사용
+  if (signal) {
+    signal.addEventListener("abort", () => ctrl.abort());
+  }
+
   return { signal: ctrl.signal, clear: () => clearTimeout(id) };
 }
 
@@ -18,6 +20,7 @@ export async function http<T>(
 ): Promise<T> {
   const { timeoutMs, ...rest } = init ?? {};
   const { signal, clear } = withTimeout(rest.signal, timeoutMs);
+
   try {
     const res = await fetch(url, {
       ...rest,
@@ -37,11 +40,11 @@ export async function http<T>(
       );
     }
     return json as T; // { data: ... } 형태 기대
-  } catch (e: any) {
-    if (e?.name === "AbortError") {
+  } catch (error: unknown) {
+    if (error instanceof Error && error.name === "AbortError") {
       throw new ApiError("Request timeout", ErrorCode.UPSTREAM, 504);
     }
-    throw e;
+    throw error;
   } finally {
     clear();
   }
