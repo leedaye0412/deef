@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Container from "@shared/components/layout/Container";
 import "./globals.css";
+import { pretendard } from "./fonts/pretendard";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://example.com"), // 배포 도메인
@@ -33,8 +34,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko" className="h-full">
-      <body className="min-h-dvh bg-background text-foreground font-sans antialiased">
+    <html lang="ko" className={pretendard.variable}>
+      <body className="min-h-dvh bg-background text-foreground font-pretendard antialiased">
         <Container>{children}</Container>
       </body>
     </html>
