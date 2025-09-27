@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { ApiError } from "@/shared/errors/ApiError";
-import { toApiError } from "@/shared/errors/toApiError";
+import { ApiError } from "@shared/errors/ApiError";
+import { toApiError } from "@shared/errors/toApiError";
 
 type Handler<T> = (req: Request, ctx?: any) => Promise<T>;
 

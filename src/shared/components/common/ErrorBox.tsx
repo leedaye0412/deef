@@ -1,7 +1,7 @@
 "use client";
 
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
+import { Alert, AlertTitle, AlertDescription } from "@shared/components/ui/alert";
+import { Button } from "@shared/components/ui/button";
 import { AlertCircle } from "lucide-react";
 
 type Props = {

@@ -1,5 +1,5 @@
-import { ApiError } from "@/shared/errors/ApiError";
-import { ErrorCode } from "@/shared/types";
+import { ApiError } from "@shared/errors/ApiError";
+import { ErrorCode } from "@shared/types";
 
 const DEFAULT_TIMEOUT = 10_000;
 

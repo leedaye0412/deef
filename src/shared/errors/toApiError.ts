@@ -1,6 +1,6 @@
 import { ApiError } from "./ApiError";
 import { statusToCode } from "./map";
-import { ErrorCode } from "@/shared/types";
+import { ErrorCode } from "@shared/types";
 
 export const toApiError = (e: unknown): ApiError => {
   if (e instanceof ApiError) return e;

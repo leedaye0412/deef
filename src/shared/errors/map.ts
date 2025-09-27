@@ -1,4 +1,4 @@
-import { ErrorCode } from "@/shared/types";
+import { ErrorCode } from "@shared/types";
 
 export const statusToCode = (status: number): ErrorCode => {
   if (status === 400) return ErrorCode.BAD_REQUEST;
