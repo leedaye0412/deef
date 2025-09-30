@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 import { ApiError } from "@shared/errors/ApiError";
 import { toApiError } from "@shared/errors/toApiError";
 
-// Next.js App Router의 Route Handler 컨텍스트 타입
+// Next.js 15 App Router의 Route Handler 컨텍스트 타입
 interface RouteContext {
-  params: Record<string, string | string[]>;
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: Promise<Record<string, string | string[]>>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 type Handler<T> = (req: Request, ctx: RouteContext) => Promise<T>;
