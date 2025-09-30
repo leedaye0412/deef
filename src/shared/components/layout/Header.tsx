@@ -82,7 +82,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-black text-white">
+    <header className="sticky top-0 z-40 w-full  text-white">
       <div className="mx-auto flex h-14 items-center justify-between px-layout-x-mobile md:px-layout-x-desktop">
         <Link href="/" className="font-extrabold tracking-wide text-24">
           DEEF
