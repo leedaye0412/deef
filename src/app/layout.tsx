@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Container from "@shared/components/layout/Container";
 import "./globals.css";
 import { pretendard } from "./fonts/pretendard";
+import Header from "@/shared/components/layout/Header";
+import Footer from "@/shared/components/layout/Footer";
+import Providers from "./providers";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://example.com"), // 배포 도메인
@@ -36,7 +39,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko" className={pretendard.variable}>
       <body className="min-h-dvh bg-background text-foreground font-pretendard antialiased">
-        <Container>{children}</Container>
+        <Providers>
+          <Header />
+          <Container>{children}</Container>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
