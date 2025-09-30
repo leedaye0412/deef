@@ -1,3 +1,9 @@
+import ContactInfo from "@/features/contact/components/ContactInfo";
+
 export default function Contact() {
-  return <div>contact</div>;
+  return (
+    <main>
+      <ContactInfo />
+    </main>
+  );
 }
