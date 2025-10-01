@@ -31,7 +31,7 @@ export default function ProjectsPage() {
   return (
     <main className="min-h-screen bg-black">
       {isDesktop ? (
-        <section className="px-5 sm:px-8 md:px-12 py-10">
+        <section className="py-10">
           <ProjectsGrid maxPerRow={4} aspect="photo" />
         </section>
       ) : (
