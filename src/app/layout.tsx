@@ -40,9 +40,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko" className={pretendard.variable}>
       <body className="min-h-dvh bg-background text-foreground font-pretendard antialiased">
         <Providers>
-          <Header />
-          <Container>{children}</Container>
-          <Footer />
+          <Container>
+            <Header />
+            {children}
+            <Footer />
+          </Container>
         </Providers>
       </body>
     </html>

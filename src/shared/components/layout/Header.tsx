@@ -21,23 +21,20 @@ export default function Header() {
   const [view, setView] = useState<"root" | "projects">("root");
   const firstLinkRef = useRef<HTMLAnchorElement | null>(null);
 
-  // 프로젝트 목록 (API)
   const { data: projects, isLoading, isError, refetch } = useProjects();
 
-  // 프리뷰(상단 썸네일) 상태
   const [previewSrc, setPreviewSrc] = useState<string | null>(null);
   const [previewAlt, setPreviewAlt] = useState<string>("");
 
   const openMenu = () => {
-    setView("root"); // ★ 먼저 루트로 세팅
-    setOpen(true); // 그 다음 열기
+    setView("root");
+    setOpen(true);
   };
   const closeMenu = () => {
-    setView("root"); // ★ 닫을 때도 루트로 리셋
+    setView("root");
     setOpen(false);
   };
 
-  // 데이터가 들어오면 landCover 있는 첫 항목으로 초기화
   useEffect(() => {
     if (!projects?.length) return;
     const firstWithCover = projects.find((p) => !!p.landCover) ?? projects[0];
@@ -45,7 +42,6 @@ export default function Header() {
     setPreviewAlt(firstWithCover.name);
   }, [projects]);
 
-  // 메뉴 열릴 때 스크롤 잠금
   useEffect(() => {
     if (!open) return;
     const original = document.body.style.overflow;
@@ -55,7 +51,6 @@ export default function Header() {
     };
   }, [open]);
 
-  // ESC로 닫기
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
@@ -83,7 +78,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 w-full  text-white">
-      <div className="mx-auto flex h-14 items-center justify-between px-layout-x-mobile md:px-layout-x-desktop">
+      <div className="mx-auto flex h-8 md:h-14 items-center justify-between">
         <Link href="/" className="font-extrabold tracking-wide text-24">
           DEEF
         </Link>
@@ -166,15 +161,28 @@ export default function Header() {
 
                 {/* PROJECTS → 서브패널 */}
                 <li>
-                  <button
-                    onClick={() => setView("projects")}
-                    className="flex w-full items-center justify-between rounded px-4 py-4 tracking-wide opacity-80 hover:opacity-100 cursor-pointer"
-                    aria-haspopup="dialog"
-                    aria-controls="mobile-panel-projects"
-                  >
-                    <span>PROJECTS</span>
-                    <ChevronRight {...iconProps} />
-                  </button>
+                  <div className="flex w-full items-center justify-between rounded px-4">
+                    {/* 왼쪽: 텍스트 클릭 → /projects로 이동 + 메뉴 닫기 */}
+                    <Link
+                      href="/projects"
+                      onClick={closeMenu}
+                      className="flex-1 py-4 text-left tracking-wide opacity-80 hover:opacity-100"
+                    >
+                      PROJECTS
+                    </Link>
+
+                    {/* 오른쪽: 아이콘 클릭 → 서브패널 열기 */}
+                    <button
+                      type="button"
+                      onClick={() => setView("projects")}
+                      aria-haspopup="dialog"
+                      aria-controls="mobile-panel-projects"
+                      className="ml-2 inline-flex h-9 w-9 items-center justify-center rounded-md opacity-80 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-white/40 cursor-pointer"
+                    >
+                      <span className="sr-only">프로젝트 하위 목록 열기</span>
+                      <ChevronRight {...iconProps} />
+                    </button>
+                  </div>
                 </li>
 
                 <li>
@@ -216,7 +224,7 @@ export default function Header() {
                 </button>
               </div>
 
-              {/* 썸네일 프리뷰 (landCover) */}
+              {/* 썸네일 프리뷰 */}
               <div className="px-3 pt-5 mt-10 border-t border-white">
                 <div className="relative aspect-[16/10] w-full overflow-hidden">
                   {isLoading ? (
@@ -238,7 +246,7 @@ export default function Header() {
                 </div>
               </div>
 
-              {/* 프로젝트 리스트 (API 데이터) */}
+              {/* 프로젝트 리스트 */}
               <ul className="mt-4">
                 {isLoading &&
                   Array.from({ length: 7 }).map((_, i) => (

@@ -1,4 +1,4 @@
-import { Instagram } from "lucide-react";
+import { Instagram} from "lucide-react";
 import Image from "next/image";
 
 type Cta = { label: string; href: string };
@@ -27,10 +27,10 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-black text-white px-layout-x-mobile md:px-layout-x-desktop">
-      <div className="py-10 md:py-14">
+    <footer className="w-full">
+      <div className="mt-20 py-10 md:py-14">
         {/* info */}
-        <div className="flex flex-col text-center gap-10 md:text-start">
+        <div className="flex flex-col text-center gap-10">
           <div className="flex flex-col">
             {INFO.map((item) => (
               <a
@@ -58,9 +58,9 @@ export default function Footer() {
         </div>
 
         {/* Center logo bar */}
-        <div className="mt-10 rounded-sm bg-black">
-          <div className="flex h-20 items-center justify-center">
-            <span className="text-2xl font-extrabold tracking-wide md:text-3xl">DEEF</span>
+        <div className="mt-10 rounded-sm">
+          <div className="flex h-20 md:h-40 items-center justify-center">
+            <span className="text-20 font-extrabold tracking-wide md:text-36">DEEF</span>
           </div>
         </div>
       </div>
@@ -88,6 +88,15 @@ export default function Footer() {
               className="opacity-80 transition-opacity hover:opacity-100"
             >
               <Image src="/youtube.png" alt="YouTube" width={16} height={12} />
+            </a>
+            <a
+              href="https://blog.naver.com/deefdesignstudio"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Blog"
+              className="opacity-80 text-14 transition-opacity hover:opacity-100 font-bold"
+            >
+              b|
             </a>
           </div>
         </div>

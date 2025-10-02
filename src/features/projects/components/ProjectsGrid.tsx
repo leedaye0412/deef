@@ -1,4 +1,3 @@
-// app/components/ProjectsGrid.tsx
 "use client";
 
 import Link from "next/link";
@@ -7,33 +6,29 @@ import { useProjects } from "@/features/projects/api/hooks";
 import type { ProjectListItem } from "@/features/projects/api/client";
 
 type Props = {
-  /** 한 줄 최대 카드 수 (기본 4). 1~4 범위 권장 */
   maxPerRow?: 1 | 2 | 3 | 4;
-  /** 카드 사이 간격 (Tailwind 간격 유틸, 기본 6) */
   gapClass?: string;
-  /** 링크 규칙 커스터마이즈 */
   hrefFor?: (p: ProjectListItem) => string;
-  /** 이미지 비율: "square" | "video" | "photo" */
   aspect?: "square" | "video" | "photo";
 };
 
 const aspectToClass: Record<NonNullable<Props["aspect"]>, string> = {
   square: "aspect-square",
-  video: "aspect-video", // 16:9
-  photo: "aspect-[3/4]", // 3:4
+  video: "aspect-video",
+  photo: "aspect-[3/4]",
 };
 
 function ProjectsGrid({
   maxPerRow = 4,
   gapClass = "gap-6",
-  hrefFor = (p) => (p.slug ? `/projects/${p.slug}` : `/projects/${p.projectId}`),
+  hrefFor = (p) => `/projects/${p.projectId}`,
   aspect = "photo",
 }: Props) {
   const { data, isLoading, isError } = useProjects();
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-">
         {Array.from({ length: 8 }).map((_, i) => (
           <div key={i} className="animate-pulse">
             <div className={`w-full ${aspectToClass[aspect]} rounded-xl bg-neutral-800`} />
@@ -49,8 +44,6 @@ function ProjectsGrid({
     return <div className="text-center text-neutral-400 py-20">No projects found.</div>;
   }
 
-  // 열 수에 따라 반응형 컬럼 구성
-  // xs: 1~2, sm: 2~3, lg: 최대 maxPerRow
   const gridCols = (() => {
     switch (maxPerRow) {
       case 1:
