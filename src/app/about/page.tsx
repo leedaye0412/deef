@@ -1,3 +1,5 @@
+import Introduce from "@/features/about/components/Introduce";
+
 export default function About() {
-  return <div>about</div>;
+  return <Introduce/>;
 }
