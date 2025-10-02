@@ -61,6 +61,7 @@ export default function HorizontalRelated({ fluid = false }: { fluid?: boolean }
                     fill
                     sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 640px"
                     className="object-cover"
+                    loading="lazy"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
                 </div>

@@ -2,6 +2,7 @@
 
 import { memo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Parallax } from "swiper/modules";
 import "swiper/css";
@@ -82,12 +83,13 @@ function VerticalSliderProjects({
                     data-swiper-parallax-opacity="0.06"
                   >
                     {cover ? (
-                      <img
+                      <Image
                         src={cover}
                         alt={p.name}
-                        className="max-h-full w-full object-contain"
-                        loading={idx === 0 ? "eager" : "lazy"}
-                        decoding="async"
+                        fill
+                        priority={idx === 0}
+                        sizes="(max-width: 1200px) 86vw, 900px"
+                        className="object-contain"
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center bg-neutral-900 text-neutral-500">
