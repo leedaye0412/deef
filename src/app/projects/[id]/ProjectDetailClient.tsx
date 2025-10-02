@@ -4,7 +4,6 @@ import { useProject } from "@/features/projects/api/hooks";
 import TitleHero from "@/features/projects/components/detail/TitleHero";
 import InfoBlock from "@/features/projects/components/detail/InfoBlock";
 import ImagesStack from "@/features/projects/components/detail/ImagesStack";
-import DescriptionBlock from "@/features/projects/components/detail/DescriptionBlock";
 import HorizontalRelated from "@/features/projects/components/detail/HorizontalRelated";
 import FullBleed from "@/shared/components/layout/FullBleed";
 
@@ -33,7 +32,6 @@ export default function ProjectDetailClient({ id }: { id: number }) {
       </FullBleed>
       <InfoBlock project={data} />
       <ImagesStack project={data} />
-      <DescriptionBlock project={data} />
       <FullBleed>
         <HorizontalRelated fluid />
       </FullBleed>
