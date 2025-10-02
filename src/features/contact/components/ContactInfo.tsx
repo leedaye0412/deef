@@ -5,7 +5,7 @@ export default function ContactInfo() {
     <section className="w-full ">
       <div className="mx-auto max-w-5xl px-6 md:px-10">
         <div className="py-16 md:py-0 md:min-h-[80svh] md:grid md:place-content-center">
-          <div className="space-y-12 md:space-y-14 text-start">
+          <div className="space-y-5 md:space-y-8 text-start">
             {/* MOBILE 1 */}
             <div className="MOBILE1">
               <h3 className="uppercase tracking-widest font-extrabold md:text-18">MOBILE</h3>

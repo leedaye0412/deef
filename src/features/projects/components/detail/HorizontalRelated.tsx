@@ -1,4 +1,3 @@
-// src/features/projects/components/detail/HorizontalRelated.tsx
 "use client";
 
 import Link from "next/link";
@@ -29,7 +28,6 @@ export default function HorizontalRelated({ fluid = false }: { fluid?: boolean }
           fluid ? "max-w-none px-0" : "max-w-[1400px] px-6 sm:px-10"
         )}
       >
-
         <Swiper
           modules={[Keyboard]}
           centeredSlides

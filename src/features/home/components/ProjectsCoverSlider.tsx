@@ -35,9 +35,11 @@ export default function ProjectsCoverSlider({
         ?.map((p) => ({
           id: p.projectId,
           name: p.name,
-          src: p.landCover || p.portCover || null,
+          mobileSrc: p.portCover || p.landCover || null,
+          desktopSrc: p.landCover || p.portCover || null,
         }))
-        .filter((s) => !!s.src) ?? []
+        .filter((s) => !!s.mobileSrc && !!s.desktopSrc)
+        .sort((a, b) => a.id - b.id) ?? []
     );
   }, [data]);
 
@@ -153,12 +155,23 @@ export default function ProjectsCoverSlider({
               }}
             >
               <div className="relative w-full h-full">
+                {/* 모바일용 이미지 */}
                 <Image
-                  src={s.src as string}
+                  src={s.mobileSrc as string}
                   alt={s.name}
                   fill
                   sizes="100vw"
-                  className={`${objectClass} ${kenBurns && isActive ? "animate-ken-burns" : ""}`}
+                  className={`${objectClass} ${kenBurns && isActive ? "animate-ken-burns" : ""} md:hidden`}
+                  priority={i === index || i === (index + 1) % count}
+                />
+
+                {/* 데스크탑용 이미지 */}
+                <Image
+                  src={s.desktopSrc as string}
+                  alt={s.name}
+                  fill
+                  sizes="100vw"
+                  className={`${objectClass} ${kenBurns && isActive ? "animate-ken-burns" : ""} hidden md:block`}
                   priority={i === index || i === (index + 1) % count}
                 />
 
@@ -173,7 +186,6 @@ export default function ProjectsCoverSlider({
             </div>
           );
         })}
-
       </div>
 
       <style jsx>{`
