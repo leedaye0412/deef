@@ -6,17 +6,15 @@ import InfoBlock from "@/features/projects/components/detail/InfoBlock";
 import ImagesStack from "@/features/projects/components/detail/ImagesStack";
 import HorizontalRelated from "@/features/projects/components/detail/HorizontalRelated";
 import FullBleed from "@/shared/components/layout/FullBleed";
+import ProjectDetailSkeleton from "@/features/projects/components/detail/ProjectDetailSkeleton";
 
 export default function ProjectDetailClient({ id }: { id: number }) {
   const { data, isLoading, isError } = useProject(id);
 
-  if (isLoading) {
-    return (
-      <main className="min-h-screen flex items-center justify-center text-white/80">
-        Loading…
-      </main>
-    );
-  }
+    if (isLoading) {
+      return <ProjectDetailSkeleton />;
+    }
+  
   if (isError || !data) {
     return (
       <main className="min-h-screen flex items-center justify-center text-red-200">

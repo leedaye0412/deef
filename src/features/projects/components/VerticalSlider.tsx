@@ -28,11 +28,16 @@ function VerticalSliderProjects({
 
   if (isLoading) {
     return (
-      <div className="flex h-[100svh] w-full items-center justify-center  text-white/80">
-        Loading…
+      <div className="flex h-[100svh] w-full items-center justify-center bg-black">
+        <div className="flex flex-col items-center space-y-6 w-[min(86vw,900px)]">
+          <div className="w-full h-[50vh] rounded-lg bg-neutral-800 animate-pulse" />
+          <div className="w-2/3 h-6 rounded bg-neutral-800 animate-pulse" />
+          <div className="w-1/2 h-5 rounded bg-neutral-800 animate-pulse" />
+        </div>
       </div>
     );
   }
+
   if (isError || !data || data.length === 0) {
     return (
       <div className="flex h-[100svh] w-full items-center justify-center text-red-200">
