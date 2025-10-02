@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect,useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -19,7 +19,6 @@ export default function Header() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [view, setView] = useState<"root" | "projects">("root");
-  const firstLinkRef = useRef<HTMLAnchorElement | null>(null);
 
   const { data: projects, isLoading, isError, refetch } = useProjects();
 
@@ -58,10 +57,6 @@ export default function Header() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
-
-  useEffect(() => {
-    if (open) requestAnimationFrame(() => firstLinkRef.current?.focus());
-  }, [open]);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
@@ -150,7 +145,6 @@ export default function Header() {
               <ul className="mt-2 space-y-1">
                 <li>
                   <Link
-                    ref={firstLinkRef}
                     href="/about"
                     onClick={closeMenu}
                     className="block rounded px-4 py-4 tracking-wide opacity-80 hover:opacity-100"
@@ -200,13 +194,13 @@ export default function Header() {
             {/* PROJECTS 서브패널 */}
             <section
               id="mobile-panel-projects"
-              className={`absolute inset-0 transition-transform duration-200 ${
+              className={`absolute inset-0 overflow-y-auto transition-transform duration-200 ${
                 view === "projects" ? "translate-x-0" : "translate-x-full"
               }`}
               aria-hidden={view !== "projects"}
             >
               {/* 상단 바 */}
-              <div className="flex h-14 items-center justify-between px-3">
+              <div className="flex h-14 items-center justify-between px-3 sticky top-0 bg-black/95 backdrop-blur z-10">
                 <button
                   onClick={() => setView("root")}
                   aria-label="뒤로"
