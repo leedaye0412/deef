@@ -83,14 +83,16 @@ function VerticalSliderProjects({
                     data-swiper-parallax-opacity="0.06"
                   >
                     {cover ? (
-                      <Image
-                        src={cover}
-                        alt={p.name}
-                        fill
-                        priority={idx === 0}
-                        sizes="(max-width: 1200px) 86vw, 900px"
-                        className="object-contain"
-                      />
+                      <div className="relative w-full h-[50vh]">
+                        <Image
+                          src={cover}
+                          alt={p.name}
+                          fill
+                          priority={idx === 0}
+                          sizes="(max-width: 1200px) 86vw, 900px"
+                          className="object-contain"
+                        />
+                      </div>
                     ) : (
                       <div className="flex h-full w-full items-center justify-center bg-neutral-900 text-neutral-500">
                         No cover
