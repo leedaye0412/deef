@@ -77,7 +77,6 @@ export default function ImagesStack({ project }: Props) {
                         height={img._naturalH ?? img.height ?? 1}
                         className="w-full h-auto object-contain md:object-cover"
                         sizes="(max-width: 768px) 100vw, 440px"
-                        priority={idx === 0}
                         onLoad={(e) => {
                           if (!img.height || !img.width || img.width === 1 || img.width === 2) {
                             const el = e.currentTarget as HTMLImageElement;
@@ -126,7 +125,6 @@ export default function ImagesStack({ project }: Props) {
                       height={img._naturalH ?? img.height ?? 1}
                       className="w-full h-auto object-contain md:h-[90vh] md:object-cover"
                       sizes="(max-width: 768px) 100vw, 1200px"
-                      priority={portraits.length === 0 && idx === 0}
                       onLoad={(e) => {
                         if (!img.height || !img.width || img.width === 1 || img.width === 2) {
                           const el = e.currentTarget as HTMLImageElement;
