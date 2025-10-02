@@ -1,4 +1,3 @@
-// src/shared/components/projects/ProjectsCoverSlider.tsx
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -61,7 +60,6 @@ export default function ProjectsCoverSlider({
     return () => clearInterval(t);
   }, [autoPlay, interval, count, transitionMs]);
 
-  // swipe/drag
   const dragStartX = useRef<number | null>(null);
   const dragging = useRef(false);
   const onPointerDown = (e: React.PointerEvent) => {
@@ -134,7 +132,7 @@ export default function ProjectsCoverSlider({
       onPointerUp={onPointerUp}
       style={{ cursor: dragging.current ? "grabbing" : "grab" }}
     >
-      <div className={`relative ${heightClass} overflow-hidden bg-black`}>
+      <div className={`relative ${heightClass} overflow-hidden`}>
         {slides.map((s, i) => {
           const isActive = i === index;
           const isPrev = i === (index - 1 + count) % count;
@@ -164,7 +162,6 @@ export default function ProjectsCoverSlider({
                   priority={i === index || i === (index + 1) % count}
                 />
 
-                {/* 오버레이 그라데이션 */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
 
                 <button
@@ -179,7 +176,6 @@ export default function ProjectsCoverSlider({
 
       </div>
 
-      {/* Ken Burns 애니메이션 정의 */}
       <style jsx>{`
         @keyframes ken-burns {
           0% {

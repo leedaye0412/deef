@@ -12,7 +12,7 @@
   --color-border: var(--border);
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
-  --color-focus: var(--focus);   /* outline-focus, ring-focus 같은 유틸로 사용 */
+  --color-focus: var(--focus)
 
   /* ➋ Font */
   --font-pretendard: var(--font-pretendard);
@@ -89,10 +89,9 @@
 
   /* === Spacing tokens === */
   --spacing-layout-x-mobile: 16px;
-  --spacing-layout-y-mobile: 20px;
+  --spacing-layout-y-mobile: 15px;
   --spacing-layout-x-desktop: 48px;
-  --spacing-layout-y-desktop: 48px;
-  --spacing-layout-y: 64px;
+  --spacing-layout-y-desktop: 15px;
 
 
   --card: oklch(1 0 0);
@@ -163,3 +162,5 @@
     @apply bg-background text-foreground;
   }
 }
+
+
