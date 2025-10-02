@@ -31,7 +31,6 @@ export default function TitleHero({
               fetchPriority="high"
               sizes="(max-width: 640px) 100vw, (max-width: 1280px) 90vw, 1400px"
               className="object-cover"
-              placeholder="blur"
               blurDataURL="/_static/lqip/placeholder-16x9.jpg"
             />
           ) : (
