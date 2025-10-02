@@ -7,28 +7,27 @@ import Footer from "@/shared/components/layout/Footer";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://example.com"), // 배포 도메인
+  metadataBase: new URL("https://deef.vercel.app"),
   title: {
     default: "DEEF",
     template: "%s | DEEF",
   },
-  description: "서비스 한 줄 소개(120~160자 추천).",
+  description: "인테리어 디자인 스튜디오",
   alternates: {
-    canonical: "/", // 기본 canonical
-    // languages: { "ko-KR": "/", "en-US": "/en" }, // 다국어 쓰면 추가
+    canonical: "/",
   },
   openGraph: {
     type: "website",
     url: "/",
     siteName: "DEEF",
     title: "DEEF",
-    description: "서비스 한 줄 소개.",
+    description: "인테리어 디자인 스튜디오",
     images: [{ url: "/og.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "DEEF",
-    description: "서비스 한 줄 소개.",
+    description: "인테리어 디자인 스튜디오",
     images: ["/og.jpg"],
   },
   robots: { index: true, follow: true },
