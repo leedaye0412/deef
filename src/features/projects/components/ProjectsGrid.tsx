@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { memo } from "react";
 import { useProjects } from "@/features/projects/api/hooks";
 import type { ProjectListItem } from "@/features/projects/api/client";
@@ -60,7 +61,7 @@ function ProjectsGrid({
 
   return (
     <div className={`grid ${gridCols} ${gapClass}`}>
-      {data.map((p) => {
+      {data.map((p, idx) => {
         const cover = p.portCover;
         const href = hrefFor(p);
 
@@ -71,12 +72,13 @@ function ProjectsGrid({
               className={`relative w-full ${aspectToClass[aspect]} overflow-hidden rounded-xl bg-neutral-900`}
             >
               {cover ? (
-                <img
+                <Image
                   src={cover}
                   alt={p.name}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  loading="lazy"
-                  decoding="async"
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  priority={idx < 4}
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center text-neutral-500">
