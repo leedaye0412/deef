@@ -38,7 +38,8 @@ export default function ProjectsCoverSlider({
           mobileSrc: p.portCover || p.landCover || null,
           desktopSrc: p.landCover || p.portCover || null,
         }))
-        .filter((s) => !!s.mobileSrc && !!s.desktopSrc) ?? []
+        .filter((s) => !!s.mobileSrc && !!s.desktopSrc)
+        .sort((a, b) => a.id - b.id) ?? []
     );
   }, [data]);
 
