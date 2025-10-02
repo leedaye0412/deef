@@ -25,15 +25,6 @@ export default function TitleHero({ project, fluid = false }: { project: Project
               No cover
             </div>
           )}
-
-          <div className="absolute left-2 top-6 font-bold sm:left-10 sm:top-20">
-            <h1 className="text-white text-24 sm:text-3xl md:text-48 tracking-tight drop-shadow">
-              {project.name.toUpperCase()}
-              {project.category ? <span> | {project.category.toUpperCase()}</span> : null}
-            </h1>
-          </div>
-
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
         </div>
       </div>
     </section>
