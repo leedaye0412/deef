@@ -38,6 +38,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko" className={pretendard.variable}>
+      <head>
+        <link rel="preconnect" href="https://eqfioozgoqgrnpjvaacv.supabase.co" crossOrigin="" />
+      </head>
       <body className="min-h-dvh bg-background text-foreground font-pretendard antialiased">
         <Providers>
           <Container>
