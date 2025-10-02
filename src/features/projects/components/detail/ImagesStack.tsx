@@ -97,7 +97,7 @@ export default function ImagesStack({ project }: Props) {
             {/* 설명 텍스트 */}
             <div className="w-full md:flex-1 min-w-0 flex items-center justify-center px-6 sm:px-10 py-10 sm:py-14">
               <p
-                className="text-start text-12 leading-7 sm:leading-8 tracking-wide whitespace-pre-line"
+                className="text-center md:text-start text-12 leading-7 sm:leading-8 tracking-wide whitespace-pre-line"
                 style={{ letterSpacing: "0.02em" }}
               >
                 {desc1}
