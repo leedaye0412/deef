@@ -4,7 +4,6 @@ export default function ContactInfo() {
   return (
     <section className="w-full min-h-[100svh] flex items-center justify-center">
       <div className="max-w-5xl pb-15">
-        <div className="space-y-5 md:space-y-8 text-start">
           <div className="space-y-5 md:space-y-8 text-start">
             {/* MOBILE 1 */}
             <div className="MOBILE1">
@@ -72,7 +71,6 @@ export default function ContactInfo() {
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 }
