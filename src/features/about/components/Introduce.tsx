@@ -19,7 +19,7 @@ export default function Introduce() {
               우리가 만들어 갈 고유한 이야기<span className="align-[-0.2em]">,</span>
             </h1>
 
-            <div className="mt-8 space-y-6 leading-7 md:leading-8">
+            <div className="mt-8 space-y-6 leading-7 md:leading-8 break-keep">
               <p>공간디자인스튜디오 DEEF 고상영, 현영식 대표 입니다.</p>
               <p>
                 돌이켜보니 우리는 ‘클라이언트만의 이야기’가 담긴 공간을 내어드릴 때 가장 큰 보람을
