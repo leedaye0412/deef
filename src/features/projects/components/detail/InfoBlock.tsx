@@ -16,7 +16,7 @@ const Row = ({ label, value }: { label: string; value?: string | number | null }
 
 export default function InfoBlock({ project }: Props) {
   return (
-    <section className="text-start md:text-center mb-20 ">
+    <section className="text-start mb-20 ">
       <div className="mx-auto max-w-[1400px] py-6 sm:py-8">
         <div className="grid">
           <Row label="project" value={project.name ?? null} />
