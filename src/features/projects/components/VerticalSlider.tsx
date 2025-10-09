@@ -7,22 +7,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Parallax } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/parallax";
-
 import { useProjects } from "@/features/projects/api/hooks";
 import type { ProjectListItem } from "@/features/projects/api/client";
 
 type Props = {
   speedMs?: number;
-  showChevron?: boolean;
   hrefFor?: (p: ProjectListItem) => string;
-  descriptionFor?: (p: ProjectListItem) => string | undefined;
 };
 
 function VerticalSliderProjects({
   speedMs = 900,
-  showChevron = true,
   hrefFor = (p) => `/projects/${p.projectId}`,
-  descriptionFor,
 }: Props) {
   const { data, isLoading, isError } = useProjects();
 
@@ -64,19 +59,11 @@ function VerticalSliderProjects({
         {data.map((p, idx) => {
           const cover = p.portCover;
           const href = hrefFor(p);
-          const desc = descriptionFor?.(p);
 
           return (
-            <SwiperSlide key={p.projectId} className="!h-[100svh]">
-              <div className="h-[100svh] w-full">
-                {/* 중앙 레일 */}
-                <div
-                  className="mx-auto flex h-full max-w-[1200px] flex-col items-center"
-                  style={{
-                    paddingTop: "72px",
-                    paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 72px)",
-                  }}
-                >
+            <SwiperSlide key={p.projectId}>
+              <div className="flex h-[100svh] w-full items-center justify-center">
+                <div className="mx-auto flex max-w-[1200px] flex-col items-center px-6 sm:px-10">
                   <Link
                     href={href}
                     className="relative mx-auto block w-[min(86vw,900px)] overflow-visible"
@@ -106,9 +93,9 @@ function VerticalSliderProjects({
                     <span className="sr-only">{p.name}</span>
                   </Link>
 
-                  {/* 텍스트 블록 */}
+                  {/* 텍스트 */}
                   <div
-                    className="mt-8 text-center"
+                    className="m-8 text-center"
                     data-swiper-parallax-y="-5%"
                     data-swiper-parallax-opacity="0.12"
                   >
@@ -119,7 +106,7 @@ function VerticalSliderProjects({
                         letterSpacing: "0.02em",
                       }}
                     >
-                      {p.name.toUpperCase()}
+                      {p.name}
                     </p>
                     {p.category && (
                       <p
@@ -127,14 +114,6 @@ function VerticalSliderProjects({
                         style={{ fontSize: "clamp(0.9rem, 1.8vw, 1.125rem)" }}
                       >
                         {p.category.toUpperCase()}
-                      </p>
-                    )}
-                    {desc && (
-                      <p
-                        className="mt-1 text-white/80"
-                        style={{ fontSize: "clamp(0.9rem, 1.7vw, 1.125rem)" }}
-                      >
-                        {desc.toUpperCase()}
                       </p>
                     )}
                   </div>

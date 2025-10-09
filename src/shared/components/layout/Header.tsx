@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -74,8 +74,16 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 w-full  text-white">
       <div className="mx-auto flex h-8 md:h-14 items-center justify-between">
-        <Link href="/" className="font-extrabold tracking-wide text-24">
-          DEEF
+        <Link href="/">
+          <Image
+            src="/deef.png"
+            alt="DEEF logo"
+            width={160}
+            height={50}
+            sizes="(max-width: 640px) 60px, (max-width: 1024px) 70px, 70px"
+            className="h-auto w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}

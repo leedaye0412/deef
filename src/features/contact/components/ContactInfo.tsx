@@ -2,9 +2,8 @@ import Link from "next/link";
 
 export default function ContactInfo() {
   return (
-    <section className="w-full ">
-      <div className="mx-auto max-w-5xl px-6 md:px-10">
-        <div className="py-16 md:py-0 md:min-h-[80svh] md:grid md:place-content-center">
+    <section className="w-full min-h-[100svh] flex items-center justify-center">
+      <div className="max-w-5xl pb-15">
           <div className="space-y-5 md:space-y-8 text-start">
             {/* MOBILE 1 */}
             <div className="MOBILE1">
@@ -72,7 +71,6 @@ export default function ContactInfo() {
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 }
