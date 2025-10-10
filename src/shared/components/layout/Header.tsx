@@ -92,7 +92,7 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className={`text-12 transition-colors ${isActive(item.href) ? "opacity-100" : "opacity-80 hover:opacity-100"}`}
+              className={`text-18 transition-colors ${isActive(item.href) ? "opacity-100" : "opacity-80 hover:opacity-100"}`}
             >
               {item.label}
             </Link>
@@ -150,7 +150,7 @@ export default function Header() {
                 </button>
               </div>
 
-              <ul className="mt-2 space-y-1">
+              <ul className="mt-2 space-y-1 text-20">
                 <li>
                   <Link
                     href="/about"
@@ -216,7 +216,7 @@ export default function Header() {
                 >
                   <ChevronLeft {...iconProps} />
                 </button>
-                <div className="text-17 font-bold tracking-widest">PROJECTS</div>
+                <div className="text-20 tracking-widest">PROJECTS</div>
                 <button
                   onClick={closeMenu}
                   aria-label="닫기"
@@ -284,7 +284,7 @@ export default function Header() {
                           setPreviewAlt(p.name);
                         }
                       }}
-                      className="flex w-full items-center justify-between py-4 text-left opacity-80 hover:opacity-100 cursor-pointer"
+                      className="flex w-full items-center justify-between py-4 text-18 text-left opacity-80 hover:opacity-100 cursor-pointer"
                     >
                       <span>{p.name}</span>
                       <ChevronRight {...iconProps} />

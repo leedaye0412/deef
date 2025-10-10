@@ -30,13 +30,13 @@ export default function Footer() {
     <footer className="w-full">
       <div className="mt-20 py-10 md:py-14">
         {/* info */}
-        <div className="flex flex-col text-center gap-10">
+        <div className="flex flex-col text-center gap-10 text-14">
           <div className="flex flex-col">
             {INFO.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-12 tracking-widest opacity-90 transition-opacity hover:opacity-100"
+                className="tracking-widest opacity-90 transition-opacity hover:opacity-100"
               >
                 {item.label}
               </a>
@@ -49,7 +49,7 @@ export default function Footer() {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-12 tracking-widest opacity-90 transition-opacity hover:opacity-100"
+                className="tracking-widest opacity-90 transition-opacity hover:opacity-100"
               >
                 {item.label}
               </a>
@@ -60,14 +60,22 @@ export default function Footer() {
         {/* Center logo bar */}
         <div className="mt-10 rounded-sm">
           <div className="flex h-20 md:h-40 items-center justify-center">
-            <span className="text-20 font-extrabold tracking-wide md:text-36">DEEF</span>
+            <Image
+              src="/deef.png"
+              alt="DEEF logo"
+              width={160}
+              height={50}
+              sizes="(max-width: 640px) 50px, (max-width: 1024px) 80px, 80px"
+              className="h-auto w-auto"
+              priority
+            />
           </div>
         </div>
       </div>
 
       {/* Bottom bar */}
       <div className="border-t border-[#333]">
-        <div className="mx-auto flex justify-between gap-4 py-6 text-xs">
+        <div className="mx-auto flex justify-between gap-4 py-6 text-14">
           <p>© {year}, DEEF All Rights Reserved.</p>
 
           <div className="flex items-center gap-4">
