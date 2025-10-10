@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://deef.kr",
+  siteUrl: "https://www.deef.kr",
   generateRobotsTxt: true,
   sitemapSize: 7000,
 };
