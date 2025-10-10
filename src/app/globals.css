@@ -76,6 +76,7 @@
 
   /* === Font tokens === */
   --font-pretendard: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-lalezar: 'Lalezar', cursive;
 
   /* 크기(폰트) */
   --text-12: 12px;  --leading-12: 1.4;
@@ -165,4 +166,8 @@
 
 .custom-swiper .swiper-pagination-bullet-active {
   background: #000 !important; /* 활성 점도 검정 */
+}
+
+  .font-lalezar {
+  font-family: var(--font-lalezar);
 }
