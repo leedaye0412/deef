@@ -89,7 +89,7 @@ function ProjectsGrid({
               {/* 하단 그라데이션 + 타이틀 */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent opacity-90" />
               <div className="absolute inset-x-3 bottom-3">
-                <p className="text-white font-semibold tracking-tight text-base md:text-lg drop-shadow">
+                <p className="text-white tracking-tight text-base md:text-lg drop-shadow">
                   {p.name}
                 </p>
                 {p.category && <p className="text-white/85 text-xs md:text-sm">{p.category}</p>}

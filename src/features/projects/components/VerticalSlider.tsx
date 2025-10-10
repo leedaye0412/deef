@@ -100,18 +100,13 @@ function VerticalSliderProjects({
                     data-swiper-parallax-opacity="0.12"
                   >
                     <p
-                      className="font-semibold tracking-wide text-white"
-                      style={{
-                        fontSize: "clamp(1.15rem, 2.6vw, 1.75rem)",
-                        letterSpacing: "0.02em",
-                      }}
+                      className="tracking-wide text-white text-22"
                     >
                       {p.name}
                     </p>
                     {p.category && (
                       <p
-                        className="mt-2 text-white/85"
-                        style={{ fontSize: "clamp(0.9rem, 1.8vw, 1.125rem)" }}
+                        className="text-white/85 text-14"
                       >
                         {p.category.toUpperCase()}
                       </p>

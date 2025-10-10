@@ -12,7 +12,7 @@ export default function Introduce() {
   return (
     <main>
       <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-5xl px-6 md:px-10">
+        <div className="font-pretendard mx-auto max-w-5xl px-6 md:px-10">
           {/* 본문 */}
           <article>
             <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">

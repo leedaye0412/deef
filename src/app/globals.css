@@ -29,7 +29,9 @@
   --text-13: var(--text-13);   --leading-13: var(--leading-13);
   --text-14: var(--text-14);   --leading-14: var(--leading-14);
   --text-16: var(--text-16);   --leading-16: var(--leading-16);
+  --text-18: var(--text-18);   --leading-16: var(--leading-18);
   --text-20: var(--text-20);   --leading-20: var(--leading-20);
+  --text-22: var(--text-22);   --leading-22: var(--leading-22);
   --text-24: var(--text-24);   --leading-24: var(--leading-24);
   --text-36: var(--text-36);   --leading-36: var(--leading-36);
   --text-48: var(--text-48);   --leading-48: var(--leading-48);
@@ -76,13 +78,16 @@
 
   /* === Font tokens === */
   --font-pretendard: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-lalezar: 'Lalezar', cursive;
 
   /* 크기(폰트) */
   --text-12: 12px;  --leading-12: 1.4;
   --text-13: 13px;  --leading-13: 1.4;
   --text-14: 14px;  --leading-14: 1.5;
   --text-16: 16px;  --leading-16: 1.6;
+  --text-18: 18px;  --leading-18: 1.6;
   --text-20: 20px;  --leading-20: 1.4;
+  --text-22: 22px;  --leading-22: 1.4;
   --text-24: 24px;  --leading-24: 1.4;
   --text-36: 36px;  --leading-36: 1.3;
   --text-48: 48px;  --leading-48: 1.2;
@@ -165,4 +170,12 @@
 
 .custom-swiper .swiper-pagination-bullet-active {
   background: #000 !important; /* 활성 점도 검정 */
+}
+
+  .font-lalezar {
+  font-family: var(--font-lalezar);
+}
+
+.font-pretendard {
+  font-family: var(--font-pretendard);
 }

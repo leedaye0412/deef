@@ -7,7 +7,7 @@ type Props = { project: ProjectDetail };
 
 const Row = ({ label, value }: { label: string; value?: string | number | null }) =>
   value ? (
-    <p className="text-12 leading-relaxed">
+    <p className="text-14 leading-relaxed">
       <span >{label}</span>
       <span className="mx-1">|</span>
       <span >{value}</span>
@@ -26,7 +26,7 @@ export default function InfoBlock({ project }: Props) {
           <Row label="photo" value={project.photo ?? null} />
           <Row label="location" value={project.location ?? null} />
           {project.blogUrl ? (
-            <p className="text-12">
+            <p className="text-14">
               <span>blog</span>
               <span className="mx-1 ">|</span>
               <Link href={project.blogUrl} target="_blank" className=" hover:decoration-white">
