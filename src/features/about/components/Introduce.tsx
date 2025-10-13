@@ -11,15 +11,10 @@ export default function Introduce() {
 
   return (
     <main>
-      <section className="py-16 md:py-24">
-        <div className="font-pretendard mx-auto max-w-5xl px-6 md:px-10">
-          {/* 본문 */}
-          <article>
-            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
-              우리가 만들어 갈 고유한 이야기<span className="align-[-0.2em]">,</span>
-            </h1>
-
-            <div className="mt-8 space-y-6 leading-7 md:leading-8 break-keep">
+      <section>
+        <div className="flex flex-col-reverse my-10 md:my-10 md:flex-row gap-5 md:gap-50 font-pretendard">
+          <article className="flex flex-1">
+            <div className="text-11 leading-[22px] space-y-6 text-justify">
               <p>공간디자인스튜디오 DEEF 고상영, 현영식 대표 입니다.</p>
               <p>
                 돌이켜보니 우리는 ‘클라이언트만의 이야기’가 담긴 공간을 내어드릴 때 가장 큰 보람을
@@ -50,24 +45,21 @@ export default function Introduce() {
               <p>
                 디자인에 정답은 없기에 우리는 이러한 공간을 사랑하고 꾸준히 만들어 갈 것이며,
                 클라이언트와 더 많은 공감대를 형성하고 싶다는 말을 전하고 싶습니다. 앞으로도
-                진심으로 진정성 있는 이야기와 매력적인 디자인들로 겸손하게 멋진 작업 이어가겠습니다.
+                진심으로 진정성 있는 이야기와 매력적인 디자인들로 겸손하게 작업 이어가겠습니다.
               </p>
             </div>
           </article>
 
-          {/* 이미지 */}
-          <figure className="mt-10 md:mt-12">
-            <div className="mx-auto w-full md:max-w-[400px] lg:max-w-[700px]">
-              <Image
-                src={aboutImg}
-                width={2048}
-                height={1365}
-                alt="DEEF Studio"
-                className="w-full h-auto rounded-md bg-neutral-900"
-                priority
-                sizes="(max-width: 768px) 100vw, 720px"
-              />
-            </div>
+          <figure className="flex-1 items-center justify-center">
+            <Image
+              src={aboutImg}
+              width={2048}
+              height={1365}
+              alt="DEEF Studio"
+              className="w-full h-auto rounded-md bg-neutral-900"
+              priority
+              sizes="(max-width: 768px) 100vw, 720px"
+            />
           </figure>
         </div>
       </section>
