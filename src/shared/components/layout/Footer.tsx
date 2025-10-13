@@ -62,7 +62,7 @@ export default function Footer() {
           <div className="flex h-20 md:h-40 items-center justify-center">
             <Image
               src="/deef.png"
-              alt="DEEF logo"
+              alt="DEEF"
               width={160}
               height={50}
               sizes="(max-width: 640px) 50px, (max-width: 1024px) 80px, 80px"

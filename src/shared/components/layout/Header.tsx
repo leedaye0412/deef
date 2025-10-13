@@ -77,7 +77,7 @@ export default function Header() {
         <Link href="/">
           <Image
             src="/deef.png"
-            alt="DEEF logo"
+            alt="DEEF"
             width={160}
             height={50}
             sizes="(max-width: 640px) 60px, (max-width: 1024px) 70px, 70px"
