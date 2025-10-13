@@ -25,6 +25,7 @@
   --spacing-layout-y: var(--spacing-layout-y);
 
   /* ➍ (선택) 텍스트 크기/라인하이트 토큰도 등록 */
+  --text-11: var(--text-11);   --leading-11: var(--leading-11);
   --text-12: var(--text-12);   --leading-12: var(--leading-12);
   --text-13: var(--text-13);   --leading-13: var(--leading-13);
   --text-14: var(--text-14);   --leading-14: var(--leading-14);
@@ -81,6 +82,7 @@
   --font-lalezar: 'Lalezar', cursive;
 
   /* 크기(폰트) */
+  --text-11: 11px;  --leading-11: 1.4;
   --text-12: 12px;  --leading-12: 1.4;
   --text-13: 13px;  --leading-13: 1.4;
   --text-14: 14px;  --leading-14: 1.5;

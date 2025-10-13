@@ -48,8 +48,8 @@ export default function ImagesStack({ project }: Props) {
   const [desc1, desc2] = (project.description ?? "").split("<br/>");
 
   return (
-    <section className="my-20 mx-0 md:mx-20 ">
-      <div className="mx-auto max-w-[1400px] space-y-12 md:space-y-16">
+    <section>
+      <div className="mx-auto max-w-[1400px] space-y-0 md:space-y-16">
         {/* Portrait slider */}
         {portraits.length > 0 && (
           <div className="flex flex-col md:flex-row">
@@ -95,10 +95,10 @@ export default function ImagesStack({ project }: Props) {
             </div>
 
             {/* 설명 텍스트 */}
-            <div className="w-full md:flex-1 min-w-0 flex items-center justify-center px-6 sm:px-10 py-10 sm:py-14">
+            <div className="w-full md:flex-1 min-w-0 flex items-center justify-center px-0 sm:px-10 py-10 sm:py-14">
               <p
-                className="font-pretendard text-center md:text-start text-12 leading-7 sm:leading-8 tracking-wide whitespace-pre-line break-keep"
-                style={{ letterSpacing: "0.02em" }}
+                className="font-pretendard text-11 leading-[22px] text-justify whitespace-pre-line"
+                style={{ wordBreak: "keep-all" }}
               >
                 {desc1}
               </p>
@@ -145,10 +145,10 @@ export default function ImagesStack({ project }: Props) {
         )}
 
         <section>
-          <div className="mx-auto max-w-[800px] px-6 sm:px-10 py-10 sm:py-14">
+          <div className="mx-auto max-w-[1000px] px-0 sm:px-10 py-10 sm:py-14">
             <p
-              className="font-pretendard text-center text-12 leading-7 sm:leading-8 tracking-wide whitespace-pre-line break-keep"
-              style={{ letterSpacing: "0.02em" }}
+              className="font-pretendard text-justify sm:text-center text-11 leading-[22px] whitespace-pre-line"
+              style={{ wordBreak: "keep-all" }}
             >
               {desc2}
             </p>
