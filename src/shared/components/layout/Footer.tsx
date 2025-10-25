@@ -63,10 +63,9 @@ export default function Footer() {
             <Image
               src="/deef.png"
               alt="DEEF"
-              width={160}
+              width={80}
               height={50}
               sizes="(max-width: 640px) 50px, (max-width: 1024px) 80px, 80px"
-              className="h-auto w-auto"
               priority
             />
           </div>

@@ -78,10 +78,9 @@ export default function Header() {
           <Image
             src="/deef.png"
             alt="DEEF"
-            width={160}
+            width={70}
             height={50}
             sizes="(max-width: 640px) 60px, (max-width: 1024px) 70px, 70px"
-            className="h-auto w-auto"
             priority
           />
         </Link>
