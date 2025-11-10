@@ -1,33 +1,19 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useProjects } from "@features/projects/api/hooks";
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
-type Props = {
-  className?: string;
-  autoPlay?: boolean;
-  interval?: number;
-  transitionMs?: number;
-  kenBurns?: boolean;
-  fullBleed?: boolean;
-  fit?: "cover" | "contain";
-  heightClass?: string;
-};
+import { useProjects } from '@features/projects/api/hooks';
 
-export default function ProjectsCoverSlider({
-  className = "",
-  autoPlay = true,
-  interval = 5000,
-  transitionMs = 2500,
-  kenBurns = true,
-  fullBleed = true,
-  fit = "cover",
-  heightClass = "h-[70vh] md:h-[80vh]",
-}: Props) {
+export default function ProjectsCoverSlider() {
   const router = useRouter();
   const { data, isLoading, isError, refetch } = useProjects();
+
+  const autoPlay = true;
+  const interval = 5000;
+  const transitionMs = 2500;
+  const kenBurns = true;
 
   const slides = useMemo(() => {
     return (
@@ -88,13 +74,7 @@ export default function ProjectsCoverSlider({
 
   if (isLoading) {
     return (
-      <div
-        className={[
-          fullBleed ? "w-screen mx-[calc(50%-50vw)]" : "w-full",
-          `relative ${heightClass} overflow-hidden`,
-          className,
-        ].join(" ")}
-      >
+      <div className="w-screen mx-[calc(50%-50vw)] relative h-svh overflow-hidden">
         <div className="absolute inset-0 animate-pulse bg-white/5" />
       </div>
     );
@@ -102,16 +82,10 @@ export default function ProjectsCoverSlider({
 
   if (isError || count === 0) {
     return (
-      <div
-        className={[
-          fullBleed ? "w-screen mx-[calc(50%-50vw)]" : "w-full",
-          `grid place-items-center ${heightClass}`,
-          className,
-        ].join(" ")}
-      >
+      <div className="w-screen mx-[calc(50%-50vw)] grid place-items-center h-svh">
         {isError ? (
           <div className="text-sm opacity-80">
-            이미지를 불러오지 못했어요.{" "}
+            이미지를 불러오지 못했어요.{' '}
             <button onClick={() => refetch()} className="underline">
               다시 시도
             </button>
@@ -121,20 +95,14 @@ export default function ProjectsCoverSlider({
     );
   }
 
-  const objectClass = fit === "cover" ? "object-cover" : "object-contain";
-
   return (
     <div
-      className={[
-        fullBleed ? "w-screen mx-[calc(50%-50vw)]" : "w-full",
-        "relative select-none",
-        className,
-      ].join(" ")}
+      className={`w-screen mx-[calc(50%-50vw)] relative select-none`}
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
-      style={{ cursor: dragging.current ? "grabbing" : "grab" }}
+      style={{ cursor: dragging.current ? 'grabbing' : 'grab' }}
     >
-      <div className={`relative ${heightClass} overflow-hidden`}>
+      <div className={`relative h-svh overflow-hidden`}>
         {slides.map((s, i) => {
           const isActive = i === index;
           const isPrev = i === (index - 1 + count) % count;
@@ -144,14 +112,14 @@ export default function ProjectsCoverSlider({
               key={s.id}
               className={`absolute inset-0 transition-all ${
                 isActive
-                  ? "opacity-100 z-20"
+                  ? 'opacity-100 z-20'
                   : isPrev && isTransitioning
-                    ? "opacity-0 z-10"
-                    : "opacity-0 z-0"
+                    ? 'opacity-0 z-10'
+                    : 'opacity-0 z-0'
               }`}
               style={{
                 transitionDuration: `${transitionMs}ms`,
-                transitionTimingFunction: "cubic-bezier(0.4, 0.0, 0.2, 1)",
+                transitionTimingFunction: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
               }}
             >
               <div className="relative w-full h-full">
@@ -161,7 +129,7 @@ export default function ProjectsCoverSlider({
                   alt={s.name}
                   fill
                   sizes="100vw"
-                  className={`${objectClass} ${kenBurns && isActive ? "animate-ken-burns" : ""} md:hidden`}
+                  className={`object-cover ${kenBurns && isActive ? 'animate-ken-burns' : ''} md:hidden`}
                   priority={i === index || i === (index + 1) % count}
                 />
 
@@ -171,7 +139,7 @@ export default function ProjectsCoverSlider({
                   alt={s.name}
                   fill
                   sizes="100vw"
-                  className={`${objectClass} ${kenBurns && isActive ? "animate-ken-burns" : ""} hidden md:block`}
+                  className={`object-cover ${kenBurns && isActive ? 'animate-ken-burns' : ''} hidden md:block`}
                   priority={i === index || i === (index + 1) % count}
                 />
 

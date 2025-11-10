@@ -1,40 +1,44 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import Image from "next/image";
-import { memo } from "react";
-import { useProjects } from "@/features/projects/api/hooks";
-import type { ProjectListItem } from "@/features/projects/api/client";
+import Image from 'next/image';
+import Link from 'next/link';
+import { memo } from 'react';
+
+import type { ProjectListItem } from '@/features/projects/api/client';
+import { useProjects } from '@/features/projects/api/hooks';
 
 type Props = {
   maxPerRow?: 1 | 2 | 3 | 4;
   gapClass?: string;
   hrefFor?: (p: ProjectListItem) => string;
-  aspect?: "square" | "video" | "photo";
+  aspect?: 'square' | 'video' | 'photo';
 };
 
-const aspectToClass: Record<NonNullable<Props["aspect"]>, string> = {
-  square: "aspect-square",
-  video: "aspect-video",
-  photo: "aspect-[3/4]",
+const aspectToClass: Record<NonNullable<Props['aspect']>, string> = {
+  square: 'aspect-square',
+  video: 'aspect-video',
+  photo: 'aspect-[3/4]',
 };
 
 function ProjectsGrid({
   maxPerRow = 4,
-  gapClass = "gap-6",
+  gapClass = 'gap-6',
   hrefFor = (p) => `/projects/${p.projectId}`,
-  aspect = "photo",
+  aspect = 'photo',
 }: Props) {
   const { data, isLoading, isError } = useProjects();
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-">
+      <div className="grid grid-cols-4 gap-6">
         {Array.from({ length: 8 }).map((_, i) => (
-          <div key={i} className="animate-pulse">
-            <div className={`w-full ${aspectToClass[aspect]} rounded-xl bg-neutral-800`} />
-            <div className="mt-3 h-3 w-2/3 rounded bg-neutral-800" />
-            <div className="mt-2 h-3 w-1/3 rounded bg-neutral-800" />
+          <div key={i} className="group">
+            <div className="relative w-full aspect-[3/4] rounded-xl bg-neutral-900 animate-pulse">
+              <div className="absolute inset-x-3 bottom-3 space-y-2">
+                <div className="h-5 w-3/4 rounded bg-neutral-800 backdrop-blur-sm" />
+                <div className="h-4 w-1/2 rounded bg-neutral-800 backdrop-blur-sm" />
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -48,14 +52,14 @@ function ProjectsGrid({
   const gridCols = (() => {
     switch (maxPerRow) {
       case 1:
-        return "grid-cols-1";
+        return 'grid-cols-1';
       case 2:
-        return "grid-cols-1 xs:grid-cols-2";
+        return 'grid-cols-1 xs:grid-cols-2';
       case 3:
-        return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+        return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
       case 4:
       default:
-        return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
+        return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
     }
   })();
 
@@ -92,7 +96,9 @@ function ProjectsGrid({
                 <p className="text-white tracking-tight text-base md:text-lg drop-shadow">
                   {p.name}
                 </p>
-                {p.category && <p className="text-white/85 text-xs md:text-sm">{p.category}</p>}
+                {p.category && (
+                  <p className="text-white/85 text-xs md:text-sm">{p.category}</p>
+                )}
               </div>
             </div>
           </Link>

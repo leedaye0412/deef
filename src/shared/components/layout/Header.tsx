@@ -1,36 +1,37 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { ChevronRight, ChevronLeft, X, Menu } from "lucide-react";
-import { useProjects } from "@features/projects/api/hooks";
+import { ChevronRight, ChevronLeft, X, Menu } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+import { useProjects } from '@features/projects/api/hooks';
 
 type NavItem = { label: string; href: string };
 const NAV: NavItem[] = [
-  { label: "ABOUT", href: "/about" },
-  { label: "PROJECTS", href: "/projects" },
-  { label: "CONTACT", href: "/contact" },
+  { label: 'ABOUT', href: '/about' },
+  { label: 'PROJECTS', href: '/projects' },
+  { label: 'CONTACT', href: '/contact' },
 ];
 
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [view, setView] = useState<"root" | "projects">("root");
+  const [view, setView] = useState<'root' | 'projects'>('root');
 
   const { data: projects, isLoading, isError, refetch } = useProjects();
 
   const [previewSrc, setPreviewSrc] = useState<string | null>(null);
-  const [previewAlt, setPreviewAlt] = useState<string>("");
+  const [previewAlt, setPreviewAlt] = useState<string>('');
 
   const openMenu = () => {
-    setView("root");
+    setView('root');
     setOpen(true);
   };
   const closeMenu = () => {
-    setView("root");
+    setView('root');
     setOpen(false);
   };
 
@@ -44,7 +45,7 @@ export default function Header() {
   useEffect(() => {
     if (!open) return;
     const original = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = original;
     };
@@ -52,14 +53,16 @@ export default function Header() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === 'Escape') setOpen(false);
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, []);
 
   const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
+    href === '/'
+      ? pathname === '/'
+      : pathname === href || pathname.startsWith(href + '/');
 
   const goProject = (id: number) => {
     setOpen(false);
@@ -67,13 +70,13 @@ export default function Header() {
   };
 
   const iconProps = {
-    className: "h-5 w-5 [stroke-width:1.75] shrink-0",
-    "aria-hidden": true as const,
+    className: 'h-5 w-5 [stroke-width:1.75] shrink-0',
+    'aria-hidden': true as const,
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full  text-white">
-      <div className="mx-auto flex h-8 md:h-14 items-center justify-between">
+    <header className="fixed top-0 z-40 w-full text-white px-layout-x-mobile md:px-layout-x-desktop">
+      <div className="flex h-16 md:h-21 items-center justify-between">
         <Link href="/">
           <Image
             src="/deef.png"
@@ -91,7 +94,7 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className={`text-18 transition-colors ${isActive(item.href) ? "opacity-100" : "opacity-80 hover:opacity-100"}`}
+              className={`text-18 transition-colors ${isActive(item.href) ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
             >
               {item.label}
             </Link>
@@ -100,14 +103,14 @@ export default function Header() {
 
         {/* Mobile toggle */}
         <button
-          aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
+          aria-label={open ? '메뉴 닫기' : '메뉴 열기'}
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => (open ? closeMenu() : openMenu())}
           className="relative -mr-1 inline-flex h-6 w-6 items-center justify-center md:hidden
                      rounded-md opacity-90 hover:opacity-100 focus:outline-none focus:ring-2 cursor-pointer focus:ring-white/40"
         >
-          <span className="sr-only">{open ? "메뉴 닫기" : "메뉴 열기"}</span>
+          <span className="sr-only">{open ? '메뉴 닫기' : '메뉴 열기'}</span>
           {open ? <X {...iconProps} /> : <Menu {...iconProps} />}
         </button>
       </div>
@@ -115,11 +118,11 @@ export default function Header() {
       {/* Mobile sheet */}
       <div
         aria-hidden={!open}
-        className={`md:hidden ${open ? "pointer-events-auto" : "pointer-events-none"}`}
+        className={`md:hidden ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}
       >
         <div
           onClick={closeMenu}
-          className={`fixed inset-0 bg-black/50 transition-opacity ${open ? "opacity-100" : "opacity-0"}`}
+          className={`fixed inset-0 bg-black/50 transition-opacity ${open ? 'opacity-100' : 'opacity-0'}`}
         />
 
         <nav
@@ -127,16 +130,16 @@ export default function Header() {
           role="dialog"
           aria-modal="true"
           className={`fixed right-0 top-0 h-full w-[88%] max-w-[420px] bg-black/95 backdrop-blur transition-transform duration-200 ${
-            open ? "translate-x-0" : "translate-x-full"
+            open ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
           <div className="relative h-full w-full overflow-hidden">
             {/* ROOT */}
             <section
               className={`absolute inset-0 px-2 transition-transform duration-200 ${
-                view === "root" ? "translate-x-0" : "-translate-x-full"
+                view === 'root' ? 'translate-x-0' : '-translate-x-full'
               }`}
-              aria-hidden={view !== "root"}
+              aria-hidden={view !== 'root'}
             >
               <div className="flex h-14 items-center justify-end px-2">
                 <button
@@ -175,7 +178,7 @@ export default function Header() {
                     {/* 오른쪽: 아이콘 클릭 → 서브패널 열기 */}
                     <button
                       type="button"
-                      onClick={() => setView("projects")}
+                      onClick={() => setView('projects')}
                       aria-haspopup="dialog"
                       aria-controls="mobile-panel-projects"
                       className="ml-2 inline-flex h-9 w-9 items-center justify-center rounded-md opacity-80 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-white/40 cursor-pointer"
@@ -202,14 +205,14 @@ export default function Header() {
             <section
               id="mobile-panel-projects"
               className={`absolute inset-0 overflow-y-auto transition-transform duration-200 ${
-                view === "projects" ? "translate-x-0" : "translate-x-full"
+                view === 'projects' ? 'translate-x-0' : 'translate-x-full'
               }`}
-              aria-hidden={view !== "projects"}
+              aria-hidden={view !== 'projects'}
             >
               {/* 상단 바 */}
               <div className="flex h-14 items-center justify-between px-3 sticky top-0 bg-black/95 backdrop-blur z-10">
                 <button
-                  onClick={() => setView("root")}
+                  onClick={() => setView('root')}
                   aria-label="뒤로"
                   className="inline-flex h-9 w-9 items-center justify-center rounded-md opacity-80 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-white/40 cursor-pointer"
                 >
@@ -233,7 +236,7 @@ export default function Header() {
                   ) : previewSrc ? (
                     <Image
                       src={previewSrc}
-                      alt={previewAlt || "Project cover"}
+                      alt={previewAlt || 'Project cover'}
                       fill
                       sizes="(max-width: 420px) 88vw, 420px"
                       className="object-cover"

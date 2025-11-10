@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import { useMemo, useState } from "react";
-import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, A11y } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import Image from 'next/image';
+import { useMemo, useState } from 'react';
+import { Navigation, Pagination, A11y } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
-import type { ProjectDetail } from "@/features/projects/api/client";
+import type { ProjectDetail } from '@/features/projects/api/client';
 
 type Props = { project: ProjectDetail };
 
-type ImgItem = ProjectDetail["images"][number] & {
+type ImgItem = ProjectDetail['images'][number] & {
   _naturalW?: number;
   _naturalH?: number;
 };
 
 function isPortrait(img: ImgItem) {
   if (img.width === 1) return true;
-  if (img.width === 2) return false; 
+  if (img.width === 2) return false;
   const w = img.width ?? img._naturalW;
   const h = img.height ?? img._naturalH;
   if (!w || !h) return false;
@@ -45,7 +45,7 @@ export default function ImagesStack({ project }: Props) {
 
   if (imgs.length === 0) return null;
 
-  const [desc1, desc2] = (project.description ?? "").split("<br/>");
+  const [desc1, desc2] = (project.description ?? '').split('<br/>');
 
   return (
     <section>
@@ -57,7 +57,7 @@ export default function ImagesStack({ project }: Props) {
             <div className="w-full md:flex-1 min-w-0">
               <Swiper
                 modules={[Navigation, Pagination, A11y]}
-                pagination={{ clickable: true }}
+                pagination={{ clickable: false }}
                 spaceBetween={16}
                 slidesPerView={1}
                 className="custom-swiper"
@@ -79,7 +79,12 @@ export default function ImagesStack({ project }: Props) {
                         sizes="(max-width: 768px) 100vw, 440px"
                         priority={idx === 0}
                         onLoad={(e) => {
-                          if (!img.height || !img.width || img.width === 1 || img.width === 2) {
+                          if (
+                            !img.height ||
+                            !img.width ||
+                            img.width === 1 ||
+                            img.width === 2
+                          ) {
                             const el = e.currentTarget as HTMLImageElement;
                             setDyn((prev) => ({
                               ...prev,
@@ -98,7 +103,7 @@ export default function ImagesStack({ project }: Props) {
             <div className="w-full md:flex-1 min-w-0 flex items-center justify-center px-0 sm:px-10 py-10 sm:py-14">
               <p
                 className="font-pretendard text-11 leading-[22px] text-justify whitespace-pre-line"
-                style={{ wordBreak: "keep-all" }}
+                style={{ wordBreak: 'keep-all' }}
               >
                 {desc1}
               </p>
@@ -111,7 +116,7 @@ export default function ImagesStack({ project }: Props) {
           <div>
             <Swiper
               modules={[Navigation, Pagination, A11y]}
-              pagination={{ clickable: true }}
+              pagination={{ clickable: false }}
               spaceBetween={16}
               slidesPerView={1}
               className="custom-swiper"
@@ -128,7 +133,12 @@ export default function ImagesStack({ project }: Props) {
                       sizes="(max-width: 768px) 100vw, 1200px"
                       priority={idx === 0}
                       onLoad={(e) => {
-                        if (!img.height || !img.width || img.width === 1 || img.width === 2) {
+                        if (
+                          !img.height ||
+                          !img.width ||
+                          img.width === 1 ||
+                          img.width === 2
+                        ) {
                           const el = e.currentTarget as HTMLImageElement;
                           setDyn((prev) => ({
                             ...prev,
@@ -148,7 +158,7 @@ export default function ImagesStack({ project }: Props) {
           <div className="mx-auto max-w-[1000px] px-0 sm:px-10 py-10 sm:py-14">
             <p
               className="font-pretendard text-justify sm:text-center text-11 leading-[22px] whitespace-pre-line"
-              style={{ wordBreak: "keep-all" }}
+              style={{ wordBreak: 'keep-all' }}
             >
               {desc2}
             </p>
