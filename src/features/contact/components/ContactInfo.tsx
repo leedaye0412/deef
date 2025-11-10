@@ -1,76 +1,84 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function ContactInfo() {
   return (
-    <section className="w-full min-h-[100svh] flex items-center justify-center">
-      <div className="max-w-5xl pb-15">
-          <div className="space-y-5 md:space-y-8 text-start">
-            {/* MOBILE 1 */}
-            <div className="MOBILE1">
-              <h3 className="uppercase tracking-widest font-extrabold md:text-18">MOBILE</h3>
-              <div className="space-y-1.5">
-                <p className="text-18 md:text-18">Sang-young Ko, Co-CEO</p>
-                <a
-                  href="tel:+821030216642"
-                  className="inline-block opacity-90 hover:opacity-100 md:text-18"
-                >
-                  +82 10-3021-6642
-                </a>
-              </div>
-            </div>
-
-            {/* MOBILE 2 */}
-            <div className="MOBILE2">
-              <h3 className="uppercase tracking-widest font-extrabold md:text-18">MOBILE</h3>
-              <div className="space-y-1.5">
-                <p className="md:text-18">Young-sik Hyun, Co-CEO</p>
-                <a
-                  href="tel:+821044369699"
-                  className="inline-block opacity-90 hover:opacity-100 md:text-18"
-                >
-                  +82 10-4436-9699
-                </a>
-              </div>
-            </div>
-
-            {/* ADDRESS */}
-            <div className="ADDRESS">
-              <h3 className="uppercase tracking-widest font-extrabold md:text-18">ADDRESS</h3>
+    <section className="w-full min-h-[100svh] flex items-center justify-center px-layout-x-mobile md:px-layout-x-desktop">
+      <div className="max-w-5xl">
+        <div className="space-y-5 md:space-y-8 text-start">
+          {/* MOBILE 1 */}
+          <div className="MOBILE1">
+            <h3 className="uppercase tracking-widest font-extrabold md:text-18">
+              MOBILE
+            </h3>
+            <div className="space-y-1.5">
+              <p className="text-18 md:text-18">Sang-young Ko, Co-CEO</p>
               <a
-                href="https://map.naver.com/p/entry/place/1658806405?c=15.00,0,0,0,dh"
-                className="inline-block opacity-90 hover:opacity-100 md:text-18"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                4F, 413 Ttukseom-ro, Seongdong-gu
-              </a>
-            </div>
-
-            {/* EMAIL */}
-            <div className="EMAIL">
-              <h3 className="uppercase tracking-widest font-extrabold md:text-18">EMAIL</h3>
-              <a
-                href="mailto:designstudio.DEEF@gmail.com"
-                className="inline-block break-all opacity-90 hover:opacity-100 md:text-18"
-              >
-                designstudio.DEEF@gmail.com
-              </a>
-            </div>
-
-            {/* INSTAGRAM */}
-            <div className="INSTAGRAM">
-              <h3 className="uppercase tracking-widest font-extrabold md:text-18">INSTAGRAM</h3>
-              <Link
-                href="https://instagram.com/designstudio.deef"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="tel:+821030216642"
                 className="inline-block opacity-90 hover:opacity-100 md:text-18"
               >
-                instagram.com/designstudio.deef
-              </Link>
+                +82 10-3021-6642
+              </a>
             </div>
           </div>
+
+          {/* MOBILE 2 */}
+          <div className="MOBILE2">
+            <h3 className="uppercase tracking-widest font-extrabold md:text-18">
+              MOBILE
+            </h3>
+            <div className="space-y-1.5">
+              <p className="md:text-18">Young-sik Hyun, Co-CEO</p>
+              <a
+                href="tel:+821044369699"
+                className="inline-block opacity-90 hover:opacity-100 md:text-18"
+              >
+                +82 10-4436-9699
+              </a>
+            </div>
+          </div>
+
+          {/* ADDRESS */}
+          <div className="ADDRESS">
+            <h3 className="uppercase tracking-widest font-extrabold md:text-18">
+              ADDRESS
+            </h3>
+            <a
+              href="https://map.naver.com/p/entry/place/1658806405?c=15.00,0,0,0,dh"
+              className="inline-block opacity-90 hover:opacity-100 md:text-18"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              4F, 413 Ttukseom-ro, Seongdong-gu
+            </a>
+          </div>
+
+          {/* EMAIL */}
+          <div className="EMAIL">
+            <h3 className="uppercase tracking-widest font-extrabold md:text-18">EMAIL</h3>
+            <a
+              href="mailto:designstudio.DEEF@gmail.com"
+              className="inline-block break-all opacity-90 hover:opacity-100 md:text-18"
+            >
+              designstudio.DEEF@gmail.com
+            </a>
+          </div>
+
+          {/* INSTAGRAM */}
+          <div className="INSTAGRAM">
+            <h3 className="uppercase tracking-widest font-extrabold md:text-18">
+              INSTAGRAM
+            </h3>
+            <Link
+              href="https://instagram.com/designstudio.deef"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block opacity-90 hover:opacity-100 md:text-18"
+            >
+              instagram.com/designstudio.deef
+            </Link>
+          </div>
         </div>
+      </div>
     </section>
   );
 }

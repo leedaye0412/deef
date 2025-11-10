@@ -1,33 +1,33 @@
-import { Instagram} from "lucide-react";
-import Image from "next/image";
+import { Instagram } from 'lucide-react';
+import Image from 'next/image';
 
 type Cta = { label: string; href: string };
 
 const INFO: Cta[] = [
   {
-    label: "VISIT STUDIO",
-    href: "https://map.naver.com/p/entry/place/1658806405?c=15.00,0,0,0,dh",
+    label: 'VISIT STUDIO',
+    href: 'https://map.naver.com/p/entry/place/1658806405?c=15.00,0,0,0,dh',
   },
-  { label: "EMAIL US", href: "mailto:designstudio.DEEF@gmail.com" },
+  { label: 'EMAIL US', href: 'mailto:designstudio.DEEF@gmail.com' },
 ];
 
 const SOCIAL: Cta[] = [
   {
-    label: "FOLLOW ON INSTAGRAM",
-    href: "https://www.instagram.com/designstudio.deef/",
+    label: 'FOLLOW ON INSTAGRAM',
+    href: 'https://www.instagram.com/designstudio.deef/',
   },
   {
-    label: "WATCH ON YOUTUBE",
-    href: "https://www.youtube.com/channel/UCjdMYkq5E_TjJmFwDu2nwBQ",
+    label: 'WATCH ON YOUTUBE',
+    href: 'https://www.youtube.com/channel/UCjdMYkq5E_TjJmFwDu2nwBQ',
   },
-  { label: "READ THE BLOG", href: "https://blog.naver.com/deefdesignstudio" },
+  { label: 'READ THE BLOG', href: 'https://blog.naver.com/deefdesignstudio' },
 ];
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full">
+    <footer className="w-full px-layout-x-mobile md:px-layout-x-desktop py-layout-y-mobile md:py-layout-y-desktop">
       <div className="mt-20 py-10 md:py-14">
         {/* info */}
         <div className="flex flex-col text-center gap-10 text-14">

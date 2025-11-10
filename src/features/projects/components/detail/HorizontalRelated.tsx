@@ -1,19 +1,18 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Keyboard } from "swiper/modules";
-import "swiper/css";
+import Image from 'next/image';
+import Link from 'next/link';
+import { Keyboard } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
-import { useProjects } from "@/features/projects/api/hooks";
-import type { ProjectListItem } from "@/features/projects/api/client";
-import { cn } from "@/lib/utils";
+import type { ProjectListItem } from '@/features/projects/api/client';
+import { useProjects } from '@/features/projects/api/hooks';
 
 const hrefFor = (p: ProjectListItem) => `/projects/${p.projectId}`;
 const coverFor = (p: ProjectListItem) => p.landCover || p.portCover || null;
 
-export default function HorizontalRelated({ fluid = false }: { fluid?: boolean }) {
+export default function HorizontalRelated() {
   const { data, isLoading, isError } = useProjects();
   if (isLoading || isError || !data?.length) return null;
 
@@ -22,12 +21,7 @@ export default function HorizontalRelated({ fluid = false }: { fluid?: boolean }
 
   return (
     <section>
-      <div
-        className={cn(
-          "mx-auto py-10 sm:py-20",
-          fluid ? "max-w-none px-0" : "max-w-[1400px] px-6 sm:px-10"
-        )}
-      >
+      <div>
         <Swiper
           modules={[Keyboard]}
           centeredSlides
