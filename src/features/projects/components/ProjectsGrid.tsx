@@ -33,13 +33,10 @@ function ProjectsGrid({
       <div className="grid grid-cols-4 gap-6">
         {Array.from({ length: 8 }).map((_, i) => (
           <div key={i} className="group">
-            <div
-              className={`relative w-full ${aspectToClass[aspect]} overflow-hidden rounded-xl bg-gradient-to-br from-neutral-800/50 via-neutral-800/30 to-neutral-800/50`}
-            >
-              <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-neutral-700/20 to-transparent" />
+            <div className="relative w-full aspect-[3/4] rounded-xl bg-neutral-900 animate-pulse">
               <div className="absolute inset-x-3 bottom-3 space-y-2">
-                <div className="h-5 w-3/4 rounded-md bg-neutral-900 backdrop-blur-sm" />
-                <div className="h-4 w-1/2 rounded-md bg-neutral-900 backdrop-blur-sm" />
+                <div className="h-5 w-3/4 rounded bg-neutral-800 backdrop-blur-sm" />
+                <div className="h-4 w-1/2 rounded bg-neutral-800 backdrop-blur-sm" />
               </div>
             </div>
           </div>
