@@ -27,7 +27,6 @@ export default function ProjectDetailClient({ id }: { id: number }) {
         <InfoBlock project={data} />
         <ImagesStack project={data} />
       </div>
-
       <HorizontalRelated />
     </main>
   );
