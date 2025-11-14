@@ -8,32 +8,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/parallax';
-import { useProjects } from '@/features/projects/api/hooks';
 
-function VerticalSliderProjects() {
-  const { data, isLoading, isError } = useProjects();
+import type { ProjectListItem } from '@/features/projects/api/client';
 
-  if (isLoading) {
+function VerticalSliderProjects({ data }: { data: ProjectListItem[] }) {
+  if (!data || data.length === 0) {
     return (
-      <div className="flex h-svh w-full items-center justify-center">
-        <div className="flex flex-col items-center w-[min(86vw,900px)]">
-          {/* 이미지 스켈레톤 */}
-          <div className="relative w-2/3 h-[50vh] my-8 rounded-xl bg-neutral-900 animate-pulse"></div>
-
-          {/* 텍스트 스켈레톤 */}
-          <div className="flex flex-col items-center space-y-3 w-full">
-            <div className="h-4 w-1/2 rounded bg-neutral-900 animate-pulse" />
-            <div className="h-4 w-1/3 rounded bg-neutral-900 animate-pulse" />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (isError || !data || data.length === 0) {
-    return (
-      <div className="flex h-svh w-full items-center justify-center">
-        Failed to load projects.
+      <div className="flex h-svh w-full items-center justify-center text-neutral-400">
+        No projects found.
       </div>
     );
   }
