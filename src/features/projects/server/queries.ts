@@ -1,9 +1,11 @@
 // src/features/projects/server/queries.ts
-import { z } from "zod";
-import { supabaseServer } from "@lib/supabase/server";
-import { ApiError } from "@shared/errors/ApiError";
-import { ErrorCode } from "@shared/types";
-import { ProjectListItemSchema } from "../model/schemas";
+import { z } from 'zod';
+
+import { supabaseServer } from '@lib/supabase/server';
+import { ApiError } from '@shared/errors/ApiError';
+import { ErrorCode } from '@shared/types';
+
+import { ProjectListItemSchema } from '../model/schemas';
 
 // 생성 입력 스키마(필요 필드만)
 export const CreateProjectSchema = ProjectListItemSchema.pick({
@@ -20,36 +22,40 @@ export async function listProjects() {
   const sb = await supabaseServer();
 
   const { data, error } = await sb
-    .from("projects")
-    .select(`
+    .from('projects')
+    .select(
+      `
       projectId,
       name,
       category,
       slug,
-      images ( path, isLandCover, isPortCover )
-    `)
-    .eq("published", true)
-    .order("projectId", { ascending: false });
+      images_webp ( path, isLandCover, isPortCover )
+    `,
+    )
+    .eq('published', true)
+    .order('projectId', { ascending: false });
 
   if (error) throw new ApiError(error.message, ErrorCode.UPSTREAM, 502, error);
 
-  const rows = (data ?? []) as Array<{
-    projectId: number;
-    name: string;
-    category: string | null;
-    slug: string | null;
-    images?: Array<{ path: string; isLandCover: boolean; isPortCover: boolean }>;
-  } & Record<string, unknown>>;
+  const rows = (data ?? []) as Array<
+    {
+      projectId: number;
+      name: string;
+      category: string | null;
+      slug: string | null;
+      images_webp?: Array<{ path: string; isLandCover: boolean; isPortCover: boolean }>;
+    } & Record<string, unknown>
+  >;
 
   return rows.map((p) => {
-    const land = p.images?.find((i) => i.isLandCover)?.path ?? null;
-    const port = p.images?.find((i) => i.isPortCover)?.path ?? null;
+    const land = p.images_webp?.find((i) => i.isLandCover)?.path ?? null;
+    const port = p.images_webp?.find((i) => i.isPortCover)?.path ?? null;
 
     return {
       projectId: p.projectId,
       name: p.name,
-      category: p.category ?? "",
-      slug: p.slug ?? "",
+      category: p.category ?? '',
+      slug: p.slug ?? '',
       landCover: land,
       portCover: port,
     };
@@ -61,8 +67,9 @@ export async function getProjectById(id: number) {
   const sb = await supabaseServer();
 
   const { data, error } = await sb
-    .from("projects")
-    .select(`
+    .from('projects')
+    .select(
+      `
       projectId,
       name,
       category,
@@ -74,7 +81,7 @@ export async function getProjectById(id: number) {
       year,
       slug,
       blogUrl,
-      images (
+      images_webp (
         imageId,
         projectId,
         path,
@@ -86,25 +93,26 @@ export async function getProjectById(id: number) {
         mime,
         alt
       )
-    `)
-    .eq("projectId", id)
-    .eq("published", true)
+    `,
+    )
+    .eq('projectId', id)
+    .eq('published', true)
     .single();
 
   if (error) {
     if (error.code === 'PGRST116') {
       // No rows returned
-      throw new ApiError("Project not found", ErrorCode.NOT_FOUND, 404);
+      throw new ApiError('Project not found', ErrorCode.NOT_FOUND, 404);
     }
     throw new ApiError(error.message, ErrorCode.UPSTREAM, 502, error);
   }
 
   if (!data) {
-    throw new ApiError("Project not found", ErrorCode.NOT_FOUND, 404);
+    throw new ApiError('Project not found', ErrorCode.NOT_FOUND, 404);
   }
 
   // 이미지 정렬 (no 순서로)
-  const sortedImages = (data.images || []).sort((a, b) => (a.no || 0) - (b.no || 0));
+  const sortedImages = (data.images_webp || []).sort((a, b) => (a.no || 0) - (b.no || 0));
 
   return {
     projectId: data.projectId,
@@ -118,7 +126,7 @@ export async function getProjectById(id: number) {
     year: data.year,
     slug: data.slug,
     blogUrl: data.blogUrl,
-    images: sortedImages.map(img => ({
+    images: sortedImages.map((img) => ({
       imageId: img.imageId,
       projectId: img.projectId,
       path: img.path,
@@ -138,20 +146,25 @@ export const UpsertIdSchema = z.object({ id: z.coerce.number().int().positive() 
 export async function createProject(input: unknown) {
   const parsed = CreateProjectSchema.safeParse(input);
   if (!parsed.success) {
-    throw new ApiError("Validation failed", ErrorCode.VALIDATION, 400, parsed.error.flatten());
+    throw new ApiError(
+      'Validation failed',
+      ErrorCode.VALIDATION,
+      400,
+      parsed.error.flatten(),
+    );
   }
 
   const sb = await supabaseServer();
 
   const { data: proj, error: pe } = await sb
-    .from("projects")
+    .from('projects')
     .insert({
       name: parsed.data.name,
       category: parsed.data.category ?? null,
       slug: parsed.data.slug ?? null,
       published: true,
     })
-    .select("projectId")
+    .select('projectId')
     .single();
 
   if (pe) throw new ApiError(pe.message, ErrorCode.UPSTREAM, 502, pe);
@@ -174,7 +187,7 @@ export async function createProject(input: unknown) {
     });
   }
   if (toInsert.length) {
-    const { error: ie } = await sb.from("images").insert(toInsert);
+    const { error: ie } = await sb.from('images_webp').insert(toInsert);
     if (ie) throw new ApiError(ie.message, ErrorCode.UPSTREAM, 502, ie);
   }
 

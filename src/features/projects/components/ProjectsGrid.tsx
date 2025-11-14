@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { memo } from 'react';
 
 import type { ProjectListItem } from '@/features/projects/api/client';
-import { useProjects } from '@/features/projects/api/hooks';
 
 type Props = {
+  data: ProjectListItem[];
   maxPerRow?: 1 | 2 | 3 | 4;
   gapClass?: string;
   hrefFor?: (p: ProjectListItem) => string;
@@ -21,31 +21,13 @@ const aspectToClass: Record<NonNullable<Props['aspect']>, string> = {
 };
 
 function ProjectsGrid({
+  data,
   maxPerRow = 4,
   gapClass = 'gap-6',
   hrefFor = (p) => `/projects/${p.projectId}`,
   aspect = 'photo',
 }: Props) {
-  const { data, isLoading, isError } = useProjects();
-
-  if (isLoading) {
-    return (
-      <div className="grid grid-cols-4 gap-6">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <div key={i} className="group">
-            <div className="relative w-full aspect-[3/4] rounded-xl bg-neutral-900 animate-pulse">
-              <div className="absolute inset-x-3 bottom-3 space-y-2">
-                <div className="h-5 w-3/4 rounded bg-neutral-800 backdrop-blur-sm" />
-                <div className="h-4 w-1/2 rounded bg-neutral-800 backdrop-blur-sm" />
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  if (isError || !data || data.length === 0) {
+  if (!data || data.length === 0) {
     return <div className="text-center text-neutral-400 py-20">No projects found.</div>;
   }
 
