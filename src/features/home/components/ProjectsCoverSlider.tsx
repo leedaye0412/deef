@@ -15,8 +15,19 @@ export default function ProjectsCoverSlider() {
   const transitionMs = 2500;
   const kenBurns = true;
 
+  const defaultSlide = {
+    id: 1,
+    name: 'Project 1',
+    mobileSrc: '/hero-mobile.webp',
+    desktopSrc: '/hero-desktop.webp',
+  };
+
   const slides = useMemo(() => {
-    return (
+    if (isLoading || isError || !data || data.length === 0) {
+      return [defaultSlide];
+    }
+
+    const projectSlides =
       data
         ?.map((p) => ({
           id: p.projectId,
@@ -25,9 +36,12 @@ export default function ProjectsCoverSlider() {
           desktopSrc: p.landCover || p.portCover || null,
         }))
         .filter((s) => !!s.mobileSrc && !!s.desktopSrc)
-        .sort((a, b) => a.id - b.id) ?? []
-    );
-  }, [data]);
+        .sort((a, b) => a.id - b.id) ?? [];
+
+    const filteredSlides = projectSlides.filter((s) => s.id !== 1);
+
+    return filteredSlides.length > 0 ? [defaultSlide, ...filteredSlides] : [defaultSlide];
+  }, [data, isLoading, isError]);
 
   const [index, setIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -72,29 +86,6 @@ export default function ProjectsCoverSlider() {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="w-screen mx-[calc(50%-50vw)] relative h-svh overflow-hidden">
-        <div className="absolute inset-0 animate-pulse bg-white/5" />
-      </div>
-    );
-  }
-
-  if (isError || count === 0) {
-    return (
-      <div className="w-screen mx-[calc(50%-50vw)] grid place-items-center h-svh">
-        {isError ? (
-          <div className="text-sm opacity-80">
-            이미지를 불러오지 못했어요.{' '}
-            <button onClick={() => refetch()} className="underline">
-              다시 시도
-            </button>
-          </div>
-        ) : null}
-      </div>
-    );
-  }
-
   return (
     <div
       className={`w-screen mx-[calc(50%-50vw)] relative select-none`}
@@ -123,7 +114,6 @@ export default function ProjectsCoverSlider() {
               }}
             >
               <div className="relative w-full h-full">
-                {/* 모바일용 이미지 */}
                 <Image
                   src={s.mobileSrc as string}
                   alt={s.name}
@@ -133,7 +123,6 @@ export default function ProjectsCoverSlider() {
                   priority={i === index || i === (index + 1) % count}
                 />
 
-                {/* 데스크탑용 이미지 */}
                 <Image
                   src={s.desktopSrc as string}
                   alt={s.name}
