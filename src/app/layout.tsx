@@ -3,34 +3,38 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Footer from '@/shared/components/layout/Footer';
 import Header from '@/shared/components/layout/Header';
+import { siteConfig } from '@/shared/config/site';
 
 import { lalezar } from './fonts/lalezar';
 import { pretendard } from './fonts/pretendard';
 import Providers from './providers';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.deef.kr'),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: 'DEEF',
+    default: siteConfig.name,
     template: '%s | DEEF',
   },
-  description: '인테리어 디자인 스튜디오',
-  alternates: {
-    canonical: '/',
-  },
+  description: siteConfig.defaultDescription,
   openGraph: {
     type: 'website',
-    url: 'https://www.deef.kr',
-    siteName: 'DEEF',
-    title: 'DEEF',
-    description: '인테리어 디자인 스튜디오',
-    images: [{ url: 'https://www.deef.kr/og.jpg', width: 1200, height: 630 }],
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.name,
+    description: siteConfig.defaultDescription,
+    images: [
+      {
+        url: `${siteConfig.url}${siteConfig.ogImage}`,
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DEEF',
-    description: '인테리어 디자인 스튜디오',
-    images: ['https://www.deef.kr/og.jpg'],
+    title: siteConfig.name,
+    description: siteConfig.defaultDescription,
+    images: [`${siteConfig.url}${siteConfig.ogImage}`],
   },
   robots: { index: true, follow: true },
   icons: { icon: '/favicon.ico' },
