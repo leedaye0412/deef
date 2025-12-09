@@ -4,7 +4,7 @@ import { ChevronRight, ChevronLeft, X, Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { useProjects } from '@features/projects/api/hooks';
 
@@ -22,25 +22,29 @@ export default function Header() {
   const [view, setView] = useState<'root' | 'projects'>('root');
 
   const { data: projects, isLoading, isError, refetch } = useProjects();
-
-  const [previewSrc, setPreviewSrc] = useState<string | null>(null);
-  const [previewAlt, setPreviewAlt] = useState<string>('');
+  const [previewProjectId, setPreviewProjectId] = useState<number | null>(null);
 
   const openMenu = () => {
     setView('root');
+    setPreviewProjectId(null);
     setOpen(true);
   };
   const closeMenu = () => {
     setView('root');
+    setPreviewProjectId(null);
     setOpen(false);
   };
 
-  useEffect(() => {
-    if (!projects?.length) return;
-    const firstWithCover = projects.find((p) => !!p.landCover) ?? projects[0];
-    setPreviewSrc(firstWithCover.landCover ?? null);
-    setPreviewAlt(firstWithCover.name);
-  }, [projects]);
+  const previewProject = useMemo(() => {
+    if (!projects?.length) return undefined;
+    if (previewProjectId != null) {
+      return projects.find((p) => p.projectId === previewProjectId);
+    }
+    return projects.find((p) => !!p.landCover) ?? projects[0];
+  }, [previewProjectId, projects]);
+
+  const previewSrc = previewProject?.landCover ?? null;
+  const previewAlt = previewProject?.name ?? '';
 
   useEffect(() => {
     if (!open) return;
@@ -276,14 +280,12 @@ export default function Header() {
                       onClick={() => goProject(p.projectId)}
                       onMouseEnter={() => {
                         if (p.landCover) {
-                          setPreviewSrc(p.landCover);
-                          setPreviewAlt(p.name);
+                          setPreviewProjectId(p.projectId);
                         }
                       }}
                       onFocus={() => {
                         if (p.landCover) {
-                          setPreviewSrc(p.landCover);
-                          setPreviewAlt(p.name);
+                          setPreviewProjectId(p.projectId);
                         }
                       }}
                       className="flex w-full items-center justify-between py-4 text-18 text-left opacity-80 hover:opacity-100 cursor-pointer"
