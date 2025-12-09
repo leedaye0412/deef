@@ -8,7 +8,5 @@ Host: https://www.deef.kr
 # Exclude
 Disallow: /api/
 
-# Non-standard directives such as Content-Signal have been removed to avoid crawler errors.
-
 # Sitemaps
 Sitemap: https://www.deef.kr/sitemap.xml
