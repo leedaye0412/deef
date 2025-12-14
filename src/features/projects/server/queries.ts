@@ -5,7 +5,12 @@ import { supabaseServer } from '@lib/supabase/server';
 import { ApiError } from '@shared/errors/ApiError';
 import { ErrorCode } from '@shared/types';
 
-import { ProjectListItemSchema } from '../model/schemas';
+import {
+  ProjectDetailSchema,
+  ProjectListItemSchema,
+  type ProjectDetail,
+  type ProjectListItem,
+} from '../model/schemas';
 
 // 생성 입력 스키마(필요 필드만)
 export const CreateProjectSchema = ProjectListItemSchema.pick({
@@ -18,7 +23,7 @@ export const CreateProjectSchema = ProjectListItemSchema.pick({
 export type CreateProjectInput = z.infer<typeof CreateProjectSchema>;
 
 // 1. 프로젝트 목록 조회
-export async function listProjects() {
+export async function listProjects(): Promise<ProjectListItem[]> {
   const sb = await supabaseServer();
 
   const { data, error } = await sb
@@ -58,12 +63,12 @@ export async function listProjects() {
       slug: p.slug ?? '',
       landCover: land,
       portCover: port,
-    };
+    } satisfies ProjectListItem;
   });
 }
 
 // 2. 프로젝트 단건 조회
-export async function getProjectById(id: number) {
+export async function getProjectById(id: number): Promise<ProjectDetail> {
   const sb = await supabaseServer();
 
   const { data, error } = await sb
@@ -114,7 +119,7 @@ export async function getProjectById(id: number) {
   // 이미지 정렬 (no 순서로)
   const sortedImages = (data.images_webp || []).sort((a, b) => (a.no || 0) - (b.no || 0));
 
-  return {
+  return ProjectDetailSchema.parse({
     projectId: data.projectId,
     name: data.name,
     category: data.category,
@@ -138,7 +143,7 @@ export async function getProjectById(id: number) {
       mime: img.mime,
       alt: img.alt,
     })),
-  };
+  });
 }
 
 export const UpsertIdSchema = z.object({ id: z.coerce.number().int().positive() });
