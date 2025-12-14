@@ -163,17 +163,17 @@ src/
 
 ```bash
 # 1) 의존성
-npm i
+pnpm install
 
-# 3) Supabase 타입 생성
-npm run gen-types
+# 2) Supabase 타입 생성
+pnpm run gen-types
 
-# 4) 개발 서버
-npm run dev
+# 3) 개발 서버
+pnpm run dev
 
-# 5) 프로덕션 빌드/실행
-npm run build
-npm start
+# 4) 프로덕션 빌드/실행
+pnpm run build
+pnpm run start
 ```
 
 ---
