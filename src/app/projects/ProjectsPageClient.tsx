@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import ErrorBox from '@shared/components/common/ErrorBox';
+
 import { useProjects } from '@/features/projects/api/hooks';
 import ProjectsGrid from '@/features/projects/components/ProjectsGrid';
 import { ProjectsGridSkeleton } from '@/features/projects/components/ProjectsGridSkeleton';
@@ -24,7 +26,7 @@ function useIsDesktop(minWidth = 1024) {
 
 export default function ProjectsPageClient() {
   const isDesktop = useIsDesktop(1024);
-  const { data, isLoading, isError } = useProjects();
+  const { data, isLoading, isError, refetch } = useProjects();
 
   if (isDesktop === null) {
     return <main className="min-h-screen" />;
@@ -39,9 +41,12 @@ export default function ProjectsPageClient() {
   }
 
   if (isError || !data) {
+    const message = isError
+      ? '프로젝트 목록을 불러오지 못했어요.'
+      : '표시할 프로젝트가 없습니다.';
     return (
-      <main className="min-h-screen flex items-center justify-center text-neutral-400">
-        Failed to load projects.
+      <main className="min-h-screen flex items-center justify-center">
+        <ErrorBox message={message} onRetry={isError ? () => refetch() : undefined} />
       </main>
     );
   }

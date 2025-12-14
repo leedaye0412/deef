@@ -1,5 +1,7 @@
 'use client';
 
+import ErrorBox from '@shared/components/common/ErrorBox';
+
 import { useProject } from '@/features/projects/api/hooks';
 import HorizontalRelated from '@/features/projects/components/detail/HorizontalRelated';
 import ImagesStack from '@/features/projects/components/detail/ImagesStack';
@@ -8,7 +10,7 @@ import ProjectDetailSkeleton from '@/features/projects/components/detail/Project
 import TitleHero from '@/features/projects/components/detail/TitleHero';
 
 export default function ProjectDetailClient({ id }: { id: number }) {
-  const { data, isLoading, isError } = useProject(id);
+  const { data, isLoading, isError, refetch } = useProject(id);
 
   if (isLoading) {
     return <ProjectDetailSkeleton />;
@@ -16,7 +18,13 @@ export default function ProjectDetailClient({ id }: { id: number }) {
 
   if (isError || !data) {
     return (
-      <main className="flex items-center justify-center">Failed to load project.</main>
+      <main className="flex min-h-[70vh] items-center justify-center px-4">
+        <ErrorBox
+          title="프로젝트 정보를 불러오지 못했어요"
+          message="잠시 후 다시 시도해 주세요."
+          onRetry={isError ? () => refetch() : undefined}
+        />
+      </main>
     );
   }
 

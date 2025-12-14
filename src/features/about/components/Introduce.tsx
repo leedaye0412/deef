@@ -1,10 +1,4 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
-
-export const metadata: Metadata = {
-  title: 'About',
-  description: 'DEEF의 방향과 디자인 철학',
-};
 
 export default function Introduce() {
   const aboutImg = '/people.jpg';
