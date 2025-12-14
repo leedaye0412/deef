@@ -10,7 +10,6 @@
   <img src="https://img.shields.io/badge/React-19.1.0-61DAFB?logo=react&logoColor=white" />
   <img src="https://img.shields.io/badge/Tailwind-4.x-06B6D4?logo=tailwindcss&logoColor=white" />
   <img src="https://img.shields.io/badge/Supabase-Postgres%20%2B%20Storage-3ECF8E?logo=supabase&logoColor=white" />
-  <img src="https://img.shields.io/badge/Prisma-ORM-2D3748?logo=prisma" />
   <img src="https://img.shields.io/badge/React%20Query-v5-FF4154" />
   <img src="https://img.shields.io/badge/Vercel-Hosting-black?logo=vercel" />
 </div>
@@ -59,7 +58,7 @@
 | **언어/런타임**    | **TypeScript (Strict)**                       | 정적 타입으로 안정성 확보, 대규모 리팩터링에 유리                                        |
 | **스타일링**      | **Tailwind CSS 4**  | 미니멀·일관된 디자인을 유틸리티로 빠르게 구축, 클래스 충돌 최소화                               |
 | **데이터 패칭/캐싱** | **TanStack Query v5**                         | 서버 상태 캐싱·동기화, 오류/로딩 상태 관리 자동화로 UX 향상                                |
-| **DB & ORM**  | **PostgreSQL (Supabase) + Prisma**            | 관계형 모델링과 Prisma DX(스키마/마이그레이션)로 생산성↑, SQL 기반 확장성                    |
+| **데이터베이스**  | **PostgreSQL (Supabase)**            | Supabase Studio/SQL로 즉시 스키마 관리, 서버 SDK와 타입 생성기로 DX 확보                    |
 | **스토리지**      | **Supabase Storage**                          | 이미지 파일 중앙 관리, 퍼블릭 버킷으로 간단한 전달 파이프라인 구성                              |
 | **이미지 최적화**   | **Next/Image (remotePatterns)**               | Supabase 원격 자산을 지연 로딩·반응형 사이즈로 전달해 퍼포먼스 개선                          |
 | **타입 생성**     | **Supabase 타입 생성기**                           | DB 스키마와 동기화된 타입으로 타입 안전한 쿼리 작성                                      |
@@ -83,7 +82,7 @@
 
 ### 런타임 흐름
 - App Router 기반 SSR/SSG/ISR 혼합.
-- **Prisma**로 **Supabase Postgres** 접근, 이미지 파일은 **Supabase Storage** 또는 `public/`.
+- 서버에서 Supabase Postgres API(SDK)로 접근, 이미지 파일은 **Supabase Storage** 또는 `public/`.
 - 고해상도 이미지는 `next/image` 또는 `<img>`로 전달.
 
 ### ERD (요약)
@@ -145,7 +144,6 @@ src/
  ├─ features/           # 화면 단위(about, contact, home, projects)
  ├─ lib/
  │   ├─ supabase/       # 클/서버용 Supabase 클라이언트
- │   ├─ prisma.ts       # Prisma Client
  │   └─ utils.ts        # 공용 유틸
  └─ shared/             # 공용 컴포넌트/타입/에러 핸들러
 ```
@@ -166,10 +164,6 @@ src/
 ```bash
 # 1) 의존성
 npm i
-
-# 2) DB 마이그레이션 (Prisma)
-npx prisma migrate dev
-npx prisma generate
 
 # 3) Supabase 타입 생성
 npm run gen-types
