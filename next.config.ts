@@ -20,7 +20,7 @@ export default withSentryConfig(nextConfig, {
 
   org: 'deef',
 
-  project: 'javascript-nextjs',
+  project: 'deef',
 
   // Only print logs for uploading source maps in CI
   silent: !process.env.CI,
