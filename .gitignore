@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local agent/style guides
+AGENTS.md
+docs/admin-spotify-style.md

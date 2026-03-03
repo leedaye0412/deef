@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import './globals.css';
+import AuthHashRedirector from '@/features/admin/auth/components/AuthHashRedirector';
 import Footer from '@/shared/components/layout/Footer';
 import Header from '@/shared/components/layout/Header';
 import { siteConfig } from '@/shared/config/site';
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-background text-foreground font-lalezar antialiased">
         <Providers>
+          <AuthHashRedirector />
           <Header />
           {children}
           <Footer />

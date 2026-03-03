@@ -7,22 +7,31 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
 import { useProjects } from '@features/projects/api/hooks';
+import { supabaseBrowser } from '@lib/supabase/client';
 
 type NavItem = { label: string; href: string };
-const NAV: NavItem[] = [
+const BASE_NAV: NavItem[] = [
   { label: 'ABOUT', href: '/about' },
   { label: 'PROJECTS', href: '/projects' },
   { label: 'CONTACT', href: '/contact' },
 ];
 
 export default function Header() {
+  const supabase = useMemo(() => supabaseBrowser(), []);
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [view, setView] = useState<'root' | 'projects'>('root');
+  const [isAdminSignedIn, setIsAdminSignedIn] = useState(false);
 
   const { data: projects, isLoading, isError, refetch } = useProjects();
   const [previewProjectId, setPreviewProjectId] = useState<number | null>(null);
+
+  const navItems = useMemo(
+    () =>
+      isAdminSignedIn ? [...BASE_NAV, { label: 'ADMIN', href: '/admin' }] : BASE_NAV,
+    [isAdminSignedIn],
+  );
 
   const openMenu = () => {
     setView('root');
@@ -63,6 +72,24 @@ export default function Header() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
+  useEffect(() => {
+    let mounted = true;
+
+    void supabase.auth.getSession().then(({ data }) => {
+      if (!mounted) return;
+      setIsAdminSignedIn(!!data.session?.user);
+    });
+
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAdminSignedIn(!!session?.user);
+    });
+
+    return () => {
+      mounted = false;
+      data.subscription.unsubscribe();
+    };
+  }, [supabase]);
+
   const isActive = (href: string) =>
     href === '/'
       ? pathname === '/'
@@ -94,7 +121,7 @@ export default function Header() {
 
         {/* Desktop nav */}
         <nav className="hidden gap-8 md:flex">
-          {NAV.map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -202,6 +229,18 @@ export default function Header() {
                     CONTACT
                   </Link>
                 </li>
+
+                {isAdminSignedIn && (
+                  <li>
+                    <Link
+                      href="/admin"
+                      onClick={closeMenu}
+                      className="block rounded px-4 py-4 tracking-wide opacity-80 hover:opacity-100"
+                    >
+                      ADMIN
+                    </Link>
+                  </li>
+                )}
               </ul>
             </section>
 
